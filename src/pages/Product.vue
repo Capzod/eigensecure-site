@@ -14,10 +14,6 @@
       <v-container fluid class="hero-container">
         <v-row align="center" class="h-100">
           <v-col cols="12" class="text-center">
-            <v-chip color="white" variant="flat" size="small" class="hero-badge mb-4">
-              <v-icon start size="small" color="#193762">mdi-shield-star</v-icon>
-              PRODUCTS & SERVICES
-            </v-chip>
             
             <h1 class="hero-title animate-fade-up">
               Empowering You to Own Security,<br class="d-none d-md-block" />
@@ -67,290 +63,435 @@
       </v-container>
     </v-sheet>
 
-    <!-- MAIN PRODUCT CATALOGUE -->
-    <v-sheet class="section-products">
-      <v-container>
-        <div class="text-center mb-12">
-          <v-chip color="#193762" variant="flat" class="mb-4" size="small">
-            CORE PLATFORM
-          </v-chip>
-          <h2 class="section-title elegant-title">
-            Complete Security Governance Ecosystem
-          </h2>
-          <p class="section-subtitle elegant-subtitle">
-            Integrated solutions that work together to protect your enterprise
-          </p>
-        </div>
+<!-- MAIN PRODUCT CATALOGUE -->
+<v-sheet class="section-products">
+  <v-container>
+    <div class="text-center mb-12">
+      <v-chip color="#193762" variant="flat" class="mb-4" size="small">
+        CORE PLATFORM
+      </v-chip>
+      <h2 class="section-title elegant-title">
+        Complete Security Governance Ecosystem
+      </h2>
+      <p class="section-subtitle elegant-subtitle">
+        Integrated solutions that work together to protect your enterprise
+      </p>
+    </div>
 
-        <!-- Product 1: Cybersecurity Governance Ecosystem -->
-        <v-card class="product-card mb-16" rounded="xl" elevation="4">
-          <v-row no-gutters class="h-100">
-            <v-col cols="12" md="6" class="product-content pa-8">
-              <div class="product-badge">
-                <v-chip color="#193762" variant="flat" size="small" class="mb-4">
-                  <v-icon start size="small" color="white">mdi-shield-check</v-icon>
-                  ISMS
-                </v-chip>
-              </div>
-              
-              <h3 class="product-headline mb-4">
-                Build a Robust Information Security Management System
-              </h3>
-              
-              <p class="product-description mb-6">
-                Streamline your organization's information security processes through a unified platform 
-                that integrates risk management, security exceptions, IT resiliency, compliance attestations, 
-                and comprehensive reporting.
-              </p>
-              
-              <div class="key-features mb-6">
-                <h4 class="features-title mb-4">Key Features:</h4>
-                <ul class="features-list">
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Unified Security Modules</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>End-to-End Risk & Exception Governance</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Business Continuity & Resiliency Oversight</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Compliance & Attestation Management</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Intelligent Dashboards & Reporting</li>
-                </ul>
-              </div>
-              
-              <v-btn
-                color="#193762"
-                size="large"
-                :href="mailtoLink"
-                class="product-cta"
-                rounded="lg"
-                variant="flat"
-              >
-                <v-icon start>mdi-information</v-icon>
-                Learn More
-              </v-btn>
-            </v-col>
-            
-            <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
-              <div class="visual-wrapper">
-                <div class="shield-visual">
-                  <v-icon size="160" color="rgba(25, 55, 98, 0.15)">mdi-shield-outline</v-icon>
-                  <v-icon size="120" color="rgba(25, 55, 98, 0.25)" class="shield-middle">mdi-shield-outline</v-icon>
-                  <v-icon size="80" color="#193762" class="shield-inner">mdi-shield-check</v-icon>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <!-- Product 2: Security Governance Management -->
-        <v-card class="product-card mb-16" rounded="xl" elevation="4">
-          <v-row no-gutters class="h-100" reverse>
-            <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
-              <div class="visual-wrapper">
-                <div class="risk-visual">
-                  <v-icon size="160" color="rgba(25, 55, 98, 0.15)">mdi-chart-timeline-variant</v-icon>
-                  <div class="risk-levels">
-                    <div class="risk-level" v-for="level in 5" :key="level"></div>
-                  </div>
-                </div>
-              </div>
-            </v-col>
-            
-            <v-col cols="12" md="6" class="product-content pa-8">
-              <div class="product-badge">
-                <v-chip color="#193762" variant="flat" size="small" class="mb-4">
-                  <v-icon start size="small" color="white">mdi-chart-box</v-icon>
-                  RISK MANAGEMENT
-                </v-chip>
-              </div>
-              
-              <h3 class="product-headline mb-4">
-                Comprehensive Risk Assessment Across Your Technology Ecosystem
-              </h3>
-              
-              <p class="product-description mb-6">
-                Manage risk across your entire technology landscape with structured assessment workflows 
-                for SaaS applications, commercial products, internally developed applications, and third-party services.
-              </p>
-              
-              <div class="key-features mb-6">
-                <h4 class="features-title mb-4">Key Features:</h4>
-                <ul class="features-list">
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Multi-Domain Risk Coverage</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Structured Assessment Workflows</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Automated Risk Scoring</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Mitigation Planning</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Complete Audit Trail</li>
-                </ul>
-              </div>
-              
-              <v-btn
-                color="#193762"
-                size="large"
-                :href="mailtoLink"
-                class="product-cta"
-                rounded="lg"
-                variant="flat"
-              >
-                <v-icon start>mdi-information</v-icon>
-                Learn More
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <!-- Product 3: Organizational Resilience -->
-        <v-card class="product-card mb-16" rounded="xl" elevation="4">
-          <v-row no-gutters class="h-100">
-            <v-col cols="12" md="6" class="product-content pa-8">
-              <div class="product-badge">
-                <v-chip color="#193762" variant="flat" size="small" class="mb-4">
-                  <v-icon start size="small" color="white">mdi-backup-restore</v-icon>
-                  RESILIENCE
-                </v-chip>
-              </div>
-              
-              <h3 class="product-headline mb-4">
-                Ensure Business Continuity & Disaster Recovery in Any Scenario
-              </h3>
-              
-              <p class="product-description mb-6">
-                Prepare your organization for disruptions with comprehensive business continuity 
-                and disaster recovery management through structured annual campaigns.
-              </p>
-              
-              <div class="key-features mb-6">
-                <h4 class="features-title mb-4">Key Features:</h4>
-                <ul class="features-list">
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Business Impact Analysis (BIA)</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Failure Mode Analysis (FMA)</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>DR Test Execution & Documentation</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>DR Plan Development</li>
-                  <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Campaign Reporting & Analytics</li>
-                </ul>
-              </div>
-              
-              <v-btn
-                color="#193762"
-                size="large"
-                :href="mailtoLink"
-                class="product-cta"
-                rounded="lg"
-                variant="flat"
-              >
-                <v-icon start>mdi-information</v-icon>
-                Learn More
-              </v-btn>
-            </v-col>
-            
-            <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
-              <div class="visual-wrapper">
-                <div class="resilience-visual">
-                  <v-icon size="160" color="rgba(25, 55, 98, 0.15)">mdi-shield-refresh</v-icon>
-                  <div class="resilience-rings">
-                    <div class="ring" v-for="ring in 3" :key="ring"></div>
-                  </div>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <!-- GRID OF ADDITIONAL PRODUCTS (4, 5, 6) -->
-        <v-row class="mb-12">
-          <v-col cols="12" md="6" lg="4" v-for="(product, index) in additionalProducts" :key="index">
-            <v-card class="compact-product-card h-100" rounded="lg" hover elevation="2">
-              <div class="card-content pa-6">
-                <div class="compact-badge mb-4">
-                  <v-chip :color="product.color" variant="flat" size="small">
-                    <v-icon start size="small" color="white">{{ product.icon }}</v-icon>
-                    {{ product.badge }}
-                  </v-chip>
-                </div>
-                
-                <h4 class="compact-title mb-3">{{ product.title }}</h4>
-                <p class="compact-description mb-4">{{ product.description }}</p>
-                
-                <div class="compact-features mb-6">
-                  <div class="feature" v-for="(feature, i) in product.features" :key="i">
-                    <v-icon size="x-small" color="#C4922C" class="mr-2">mdi-check</v-icon>
-                    <span class="feature-text">{{ feature }}</span>
-                  </div>
-                </div>
-                
-                <v-btn
-                  :color="product.color"
-                  size="default"
-                  :href="mailtoLink"
-                  class="compact-cta"
-                  rounded="lg"
-                  variant="flat"
-                  block
-                >
-                  <v-icon start size="small">mdi-information</v-icon>
-                  Learn More
-                </v-btn>
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-sheet>
-
-    <!-- EXCELLENCE SECTION -->
-    <v-sheet class="section-excellence">
-      <v-container>
-        <div class="text-center mb-12">
-          <v-chip color="#193762" variant="flat" class="mb-4" size="small">
-            PLATFORM EXCELLENCE
-          </v-chip>
-          <h2 class="section-title elegant-title">
-            Enterprise-Grade Security Intelligence
-          </h2>
-          <p class="section-subtitle elegant-subtitle">
-            Built for scale, reliability, and security to meet modern enterprise demands
-          </p>
-        </div>
-
-        <v-row>
-          <v-col cols="12" md="6" lg="3" v-for="(feature, index) in excellenceFeatures" :key="index">
-            <div class="excellence-card text-center pa-6">
-              <div class="excellence-icon-wrapper mb-6">
-                <v-icon size="56" color="#193762">{{ feature.icon }}</v-icon>
-              </div>
-              <h4 class="excellence-title mb-3">{{ feature.title }}</h4>
-              <p class="excellence-description">{{ feature.description }}</p>
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-sheet>
-
-    <!-- TECHNOLOGY STACK -->
-    <v-sheet class="section-technology">
-      <v-container>
-        <div class="text-center mb-12">
-          <v-chip color="#193762" variant="flat" class="mb-4" size="small">
-            TECHNOLOGY
-          </v-chip>
-          <h2 class="section-title elegant-title">
-            Built on Enterprise-Grade Technology
-          </h2>
-          <p class="section-subtitle elegant-subtitle">
-            Modern, scalable architecture for mission-critical security operations
-          </p>
-        </div>
-
-        <div class="tech-stack-grid">
-          <div class="tech-category" v-for="category in techStack" :key="category.title">
-            <h4 class="tech-category-title mb-4">{{ category.title }}</h4>
-            <div class="tech-items">
-              <div class="tech-item" v-for="item in category.items" :key="item">
-                <v-icon size="small" color="#C4922C" class="mr-2">mdi-check</v-icon>
-                {{ item }}
-              </div>
-            </div>
+    <!-- Product 1: Cybersecurity Governance Ecosystem -->
+    <v-card class="product-card mb-16" rounded="xl" elevation="4">
+      <v-row no-gutters class="h-100">
+        <v-col cols="12" md="6" class="product-content pa-8">
+          <div class="product-badge">
+            <v-chip color="#193762" variant="flat" size="small" class="mb-4">
+              <v-icon start size="small" color="white">mdi-shield-check</v-icon>
+              Cybersecurity Governance Ecosystem (ISMS) 
+            </v-chip>
           </div>
+          
+          <h3 class="product-headline mb-4">
+            Build a Robust Information Security Management System
+          </h3>
+          
+          <p class="product-description mb-6">
+            Streamline your organization's information security processes through a unified platform 
+            that integrates risk management, security exceptions, IT resiliency, compliance attestations, 
+            and comprehensive reporting.
+          </p>
+          
+          <div class="key-features mb-6">
+            <h4 class="features-title mb-4">Key Features:</h4>
+            <ul class="features-list">
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Unified Security Modules</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>End-to-End Risk & Exception Governance</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Business Continuity & Resiliency Oversight</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Compliance & Attestation Management</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Intelligent Dashboards & Reporting</li>
+            </ul>
+          </div>
+          
+          <v-btn
+            color="#193762"
+            size="large"
+            :href="mailtoLink"
+            class="product-cta"
+            rounded="lg"
+            variant="flat"
+          >
+            <v-icon start>mdi-information</v-icon>
+            Learn More
+          </v-btn>
+        </v-col>
+        
+        <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
+          <div class="visual-wrapper">
+            <img 
+              src="/21.png" 
+              alt="eigenSecure Cybersecurity Governance Ecosystem"
+              class="product-image"
+            />
+          </div>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <!-- Product 2: Security Governance Management -->
+    <v-card class="product-card mb-16" rounded="xl" elevation="4">
+      <v-row no-gutters class="h-100" reverse>
+        <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
+          <div class="visual-wrapper">
+            <img 
+              src="/20.png" 
+              alt="eigenSecure Risk Management"
+              class="product-image"
+            />
+          </div>
+        </v-col>
+        
+        <v-col cols="12" md="6" class="product-content pa-8">
+          <div class="product-badge">
+            <v-chip color="#193762" variant="flat" size="small" class="mb-4">
+              <v-icon start size="small" color="white">mdi-chart-box</v-icon>
+              RISK MANAGEMENT
+            </v-chip>
+          </div>
+          
+          <h3 class="product-headline mb-4">
+            Comprehensive Risk Assessment Across Your Technology Ecosystem
+          </h3>
+          
+          <p class="product-description mb-6">
+            Manage risk across your entire technology landscape with structured assessment workflows 
+            for SaaS applications, commercial products, internally developed applications, and third-party services.
+          </p>
+          
+          <div class="key-features mb-6">
+            <h4 class="features-title mb-4">Key Features:</h4>
+            <ul class="features-list">
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Multi-Domain Risk Coverage</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Structured Assessment Workflows</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Automated Risk Scoring</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Mitigation Planning</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Complete Audit Trail</li>
+            </ul>
+          </div>
+          
+          <v-btn
+            color="#193762"
+            size="large"
+            :href="mailtoLink"
+            class="product-cta"
+            rounded="lg"
+            variant="flat"
+          >
+            <v-icon start>mdi-information</v-icon>
+            Learn More
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <!-- Product 3: Organizational Resilience -->
+    <v-card class="product-card mb-16" rounded="xl" elevation="4">
+      <v-row no-gutters class="h-100">
+        <v-col cols="12" md="6" class="product-content pa-8">
+          <div class="product-badge">
+            <v-chip color="#193762" variant="flat" size="small" class="mb-4">
+              <v-icon start size="small" color="white">mdi-backup-restore</v-icon>
+              RESILIENCE
+            </v-chip>
+          </div>
+          
+          <h3 class="product-headline mb-4">
+            Ensure Business Continuity & Disaster Recovery in Any Scenario
+          </h3>
+          
+          <p class="product-description mb-6">
+            Prepare your organization for disruptions with comprehensive business continuity 
+            and disaster recovery management through structured annual campaigns.
+          </p>
+          
+          <div class="key-features mb-6">
+            <h4 class="features-title mb-4">Key Features:</h4>
+            <ul class="features-list">
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Business Impact Analysis (BIA)</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Failure Mode Analysis (FMA)</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>DR Test Execution & Documentation</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>DR Plan Development</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Campaign Reporting & Analytics</li>
+            </ul>
+          </div>
+          
+          <v-btn
+            color="#193762"
+            size="large"
+            :href="mailtoLink"
+            class="product-cta"
+            rounded="lg"
+            variant="flat"
+          >
+            <v-icon start>mdi-information</v-icon>
+            Learn More
+          </v-btn>
+        </v-col>
+        
+        <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
+          <div class="visual-wrapper">
+            <img 
+              src="/22.png" 
+              alt="eigenSecure Business Resilience"
+              class="product-image"
+            />
+          </div>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <!-- Product 4: IT Compliance & Attestation -->
+    <v-card class="product-card mb-16" rounded="xl" elevation="4">
+      <v-row no-gutters class="h-100" reverse>
+        <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
+          <div class="visual-wrapper">
+            <img 
+              src="/24.png" 
+              alt="eigenSecure IT Compliance & Attestation"
+              class="product-image"
+            />
+          </div>
+        </v-col>
+        
+        <v-col cols="12" md="6" class="product-content pa-8">
+          <div class="product-badge">
+            <v-chip color="#193762" variant="flat" size="small" class="mb-4">
+              <v-icon start size="small" color="white">mdi-file-document-check</v-icon>
+              IT COMPLIANCE & ATTESTATION
+            </v-chip>
+          </div>
+          
+          <h3 class="product-headline mb-4">
+            Centralized IT Compliance and Attestation Management
+          </h3>
+          
+          <p class="product-description mb-6">
+            Maintain continuous compliance across critical IT domains with a centralized attestation platform.
+          </p>
+          
+          <div class="key-features mb-6">
+            <h4 class="features-title mb-4">Key Features:</h4>
+            <ul class="features-list">
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Continuity, Recovery & Change Compliance</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Identity, Access & Security Controls</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Risk & Asset Lifecycle Governance</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Unified Workflows & Approvals</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Centralized Dashboards & Audit-Ready Records</li>
+            </ul>
+          </div>
+          
+          <v-btn
+            color="#193762"
+            size="large"
+            :href="mailtoLink"
+            class="product-cta"
+            rounded="lg"
+            variant="flat"
+          >
+            <v-icon start>mdi-information</v-icon>
+            Learn More
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <!-- Product 5: Security Exceptions Management -->
+    <v-card class="product-card mb-16" rounded="xl" elevation="4">
+      <v-row no-gutters class="h-100">
+        <v-col cols="12" md="6" class="product-content pa-8">
+          <div class="product-badge">
+            <v-chip color="#193762" variant="flat" size="small" class="mb-4">
+              <v-icon start size="small" color="white">mdi-alert-circle-check</v-icon>
+              EXCEPTIONS
+            </v-chip>
+          </div>
+          
+          <h3 class="product-headline mb-4">
+            Controlled Security Exception Management with Multi-Level Approval
+          </h3>
+          
+          <p class="product-description mb-6">
+            Manage security policy exceptions through a rigorous approval framework that balances operational needs with security requirements.
+          </p>
+          
+          <div class="key-features mb-6">
+            <h4 class="features-title mb-4">Key Features:</h4>
+            <ul class="features-list">
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Comprehensive Exception Management</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Multi-Level Approval Workflow</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Exception Lifecycle Tracking</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Automated Stakeholder Communications</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Enterprise-Wide Visibility</li>
+            </ul>
+          </div>
+          
+          <v-btn
+            color="#193762"
+            size="large"
+            :href="mailtoLink"
+            class="product-cta"
+            rounded="lg"
+            variant="flat"
+          >
+            <v-icon start>mdi-information</v-icon>
+            Learn More
+          </v-btn>
+        </v-col>
+        
+        <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
+          <div class="visual-wrapper">
+            <img 
+              src="/16.png" 
+              alt="eigenSecure Security Exceptions Management"
+              class="product-image"
+            />
+          </div>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <!-- Product 6: Centralized Resource Center -->
+    <v-card class="product-card mb-16" rounded="xl" elevation="4">
+      <v-row no-gutters class="h-100" reverse>
+        <v-col cols="12" md="6" class="product-visual d-flex align-center justify-center pa-8">
+          <div class="visual-wrapper">
+            <img 
+              src="/18.png" 
+              alt="eigenSecure Centralized Resource Center"
+              class="product-image"
+            />
+          </div>
+        </v-col>
+        
+        <v-col cols="12" md="6" class="product-content pa-8">
+          <div class="product-badge">
+            <v-chip color="#193762" variant="flat" size="small" class="mb-4">
+              <v-icon start size="small" color="white">mdi-account-details</v-icon>
+              CENTRALIZED RESOURCE CENTER
+            </v-chip>
+          </div>
+          
+          <h3 class="product-headline mb-4">
+            Personalized Security Profile and Organizational Intelligence
+          </h3>
+          
+          <p class="product-description mb-6">
+            Access your complete security profile and organizational context in one centralized location.
+          </p>
+          
+          <div class="key-features mb-6">
+            <h4 class="features-title mb-4">Key Features:</h4>
+            <ul class="features-list">
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Personal Security Dashboard</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Application Ownership Management</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Organizational Structure Intelligence</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Asset & Accountability Tracking</li>
+              <li><v-icon size="small" color="#C4922C" class="mr-2">mdi-check-circle</v-icon>Enterprise-Wide Visibility</li>
+            </ul>
+          </div>
+          
+          <v-btn
+            color="#193762"
+            size="large"
+            :href="mailtoLink"
+            class="product-cta"
+            rounded="lg"
+            variant="flat"
+          >
+            <v-icon start>mdi-information</v-icon>
+            Learn More
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-container>
+</v-sheet>
+
+<!-- EXCELLENCE SECTION (The section above tech stack) -->
+<v-sheet class="section-excellence">
+  <v-container>
+    <div class="text-center mb-12">
+      <v-chip color="#193762" variant="flat" class="mb-4" size="small">
+        PLATFORM EXCELLENCE
+      </v-chip>
+      <h2 class="section-title elegant-title">
+        Enterprise-Grade Security Intelligence
+      </h2>
+      <p class="section-subtitle elegant-subtitle">
+        Built for scale, reliability, and security to meet modern enterprise demands
+      </p>
+    </div>
+
+    <v-row>
+      <v-col cols="12" md="6" lg="3" v-for="(feature, index) in excellenceFeatures" :key="index">
+        <div class="excellence-card text-center pa-6">
+          <div class="excellence-icon-wrapper mb-6">
+            <v-icon size="56" color="#193762">{{ feature.icon }}</v-icon>
+          </div>
+          <h4 class="excellence-title mb-3">{{ feature.title }}</h4>
+          <p class="excellence-description">{{ feature.description }}</p>
         </div>
-      </v-container>
-    </v-sheet>
+      </v-col>
+    </v-row>
+  </v-container>
+</v-sheet>
+
+<!-- TECHNOLOGY STACK - UPDATED WITH BLazor icon -->
+<v-sheet class="section-technology">
+  <v-container>
+    <div class="text-center mb-12">
+      <v-chip color="#193762" variant="flat" class="mb-4" size="small">
+        TECHNOLOGY
+      </v-chip>
+      <h2 class="section-title elegant-title">
+        Built on Enterprise-Grade Technology
+      </h2>
+      <p class="section-subtitle elegant-subtitle">
+        Modern, scalable architecture for mission-critical security operations
+      </p>
+    </div>
+
+    <!-- Single Technology Card -->
+    <div class="single-tech-card-wrapper">
+      <v-card class="single-tech-card" rounded="xl" elevation="4">
+        <v-container>
+          <v-row align="center" justify="center">
+            <v-col cols="12" class="text-center">
+              <div class="tech-icons-grid">
+                <!-- Technology items with mixed MDI and Font Awesome icons -->
+                <div class="tech-icon-item" v-for="(tech, index) in techStack" :key="index">
+                  <div class="tech-icon-circle">
+                    <!-- Conditional rendering for MDI vs Font Awesome -->
+                    <i 
+                      v-if="tech.isFontAwesome" 
+                      :class="tech.icon" 
+                      class="fa-icon"
+                      style="font-size: 32px; color: #193762;"
+                    ></i>
+                    <v-icon 
+                      v-else 
+                      size="32" 
+                      color="#193762"
+                    >{{ tech.icon }}</v-icon>
+                  </div>
+                  <div class="tech-name">{{ tech.name }}</div>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+    </div>
+  </v-container>
+</v-sheet>
+
 
     <!-- FINAL CTA -->
     <v-sheet class="section-final-cta">
@@ -398,56 +539,10 @@ import { ref } from 'vue'
 // Email template with pre-filled content
 const mailtoLink = ref('mailto:sales@eigensecure.com?subject=Connect%20with%20eigenSecure%20Team&body=Connect%20With%20Our%20Team%0A%0AHello%20Team,%0A%0AI%20would%20like%20to%20connect%20with%20you%20to%20understand%20your%20services%20and%20explore%20how%20we%20can%20work%20together.%0A%0ACompany%20Name:%20_________%20%0AContact%20Person:%20_________%20%0ADesignation:%20_________%20%0AEmail:%20_________%20%0APhone:%20_________%20%0A%0AExpected%20Engagement%20Type:%20_________%20%0A%0AThank%20you,%0A%5BYour%20Name%5D')
 
-// Additional Products (4, 5, 6)
-const additionalProducts = ref([
-  {
-    badge: 'COMPLIANCE',
-    title: 'Centralized IT Compliance and Attestation Management',
-    description: 'Maintain continuous compliance across critical IT domains with a centralized attestation platform.',
-    icon: 'mdi-file-document-check',
-    color: '#193762',
-    features: [
-      'Continuity, Recovery & Change Compliance',
-      'Identity, Access & Security Controls',
-      'Risk & Asset Lifecycle Governance',
-      'Unified Workflows & Approvals',
-      'Centralized Dashboards & Audit-Ready Records'
-    ]
-  },
-  {
-    badge: 'EXCEPTIONS',
-    title: 'Controlled Security Exception Management',
-    description: 'Manage security policy exceptions through a rigorous approval framework that balances operational needs with security requirements.',
-    icon: 'mdi-alert-circle-check',
-    color: '#193762',
-    features: [
-      'Comprehensive Exception Management',
-      'Multi-Level Approval Workflow',
-      'Exception Lifecycle Tracking',
-      'Automated Stakeholder Communications',
-      'Enterprise-Wide Visibility'
-    ]
-  },
-  {
-    badge: 'RESOURCE CENTER',
-    title: 'Personalized Security Profile and Organizational Intelligence',
-    description: 'Access your complete security profile and organizational context in one centralized location.',
-    icon: 'mdi-account-details',
-    color: '#193762',
-    features: [
-      'Personal Security Dashboard',
-      'Application Ownership Management',
-      'Organizational Structure Intelligence',
-      'Asset & Accountability Tracking',
-      'Enterprise-Wide Visibility'
-    ]
-  }
-])
-
 // Excellence Features
 const excellenceFeatures = ref([
   {
-    icon: 'mdi-browser',
+    icon: 'mdi-language-csharp',
     title: 'Blazor-Powered Interface',
     description: 'Seamless, responsive UI built with modern .NET Blazor technology for desktop-class performance.'
   },
@@ -468,31 +563,37 @@ const excellenceFeatures = ref([
   }
 ])
 
-// Technology Stack
+// Technology Stack - Now a single array with icons
 const techStack = ref([
-  {
-    title: 'Frontend Architecture',
-    items: ['Blazor WebAssembly']
+  { 
+    name: 'Blazor Web Assembly', 
+    icon: 'mdi-language-csharp',  // Font Awesome icon
+    isFontAwesome: false 
   },
-  {
-    title: 'Backend Infrastructure',
-    items: ['C# & .NET', 'ASP.NET Core']
+  { 
+    name: 'Vue.JS', 
+    icon: 'mdi-vuejs',  // MDI icon
+    isFontAwesome: false 
   },
-  {
-    title: 'Data Layer',
-    items: ['Microsoft SQL Server', 'Entity Framework Core']
+  { 
+    name: 'C#', 
+    icon: 'mdi-language-csharp',  // MDI icon
+    isFontAwesome: false 
   },
-  {
-    title: 'Integration & APIs',
-    items: ['REST APIs', 'JSON']
+  { 
+    name: '.NET Core', 
+    icon: 'mdi-dot-net',  // MDI icon
+    isFontAwesome: false 
   },
-  {
-    title: 'Cloud Platform',
-    items: ['Microsoft Azure', 'Azure Active Directory']
+  { 
+    name: 'SQL', 
+    icon: 'mdi-database',  // MDI icon
+    isFontAwesome: false 
   },
-  {
-    title: 'Security & Authentication',
-    items: ['Multi-Factor Authentication', 'JWT Tokens', 'OAuth 2.0']
+  { 
+    name: 'Microsoft Azure', 
+    icon: 'mdi-microsoft-azure',  // MDI icon
+    isFontAwesome: false 
   }
 ])
 
@@ -808,56 +909,114 @@ const particleStyle = (i) => {
 .ring:nth-child(2) { width: 140px; height: 140px; animation: pulseRing 3s ease-in-out infinite; }
 .ring:nth-child(3) { width: 100px; height: 100px; }
 
-/* COMPACT PRODUCT CARDS */
-.compact-product-card {
-  transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+/* NEW VISUALS FOR PRODUCTS 4,5,6 */
+.compliance-visual {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.compact-product-card:hover {
-  border-color: #C4922C;
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(196, 146, 44, 0.1) !important;
+.compliance-layers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.compact-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #0B1C2D;
-  line-height: 1.3;
+.layer {
+  position: absolute;
+  border: 2px solid rgba(25, 55, 98, 0.1);
+  border-radius: 8px;
+  animation: floatLayer 3s ease-in-out infinite;
 }
 
-.compact-description {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #64748b;
+.layer:nth-child(1) { width: 180px; height: 180px; animation-delay: 0s; }
+.layer:nth-child(2) { width: 140px; height: 140px; animation-delay: 1s; }
+.layer:nth-child(3) { width: 100px; height: 100px; animation-delay: 2s; }
+
+@keyframes floatLayer {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
 }
 
-.compact-features {
+.exceptions-visual {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exception-approvals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.feature {
+.approval-step {
+  width: 80%;
+  height: 8px;
+  background: linear-gradient(90deg, #193762 0%, #C4922C 100%);
+  border-radius: 4px;
+  opacity: 0.6;
+  animation: slideInRight 1s ease-out forwards;
+}
+
+.approval-step:nth-child(1) { animation-delay: 0.1s; }
+.approval-step:nth-child(2) { animation-delay: 0.3s; }
+.approval-step:nth-child(3) { animation-delay: 0.5s; }
+.approval-step:nth-child(4) { animation-delay: 0.7s; }
+
+@keyframes slideInRight {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 0.6; }
+}
+
+.resource-visual {
+  position: relative;
+  width: 200px;
+  height: 200px;
   display: flex;
-  align-items: flex-start;
-  color: #64748b;
-  font-size: 0.875rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.feature-text {
-  line-height: 1.5;
+.resource-connections {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-.compact-cta {
-  background: #193762 !important;
-  color: white !important;
-  transition: all 0.3s ease !important;
+.connection {
+  position: absolute;
+  width: 4px;
+  height: 40px;
+  background: linear-gradient(to bottom, #193762, #C4922C);
+  border-radius: 2px;
+  opacity: 0.6;
+  animation: pulseConnection 2s ease-in-out infinite;
 }
 
-.compact-cta:hover {
-  background: #C4922C !important;
+.connection:nth-child(1) { top: 20%; left: 50%; transform: translateX(-50%) rotate(0deg); animation-delay: 0s; }
+.connection:nth-child(2) { top: 50%; left: 20%; transform: translateY(-50%) rotate(45deg); animation-delay: 0.3s; }
+.connection:nth-child(3) { top: 50%; right: 20%; transform: translateY(-50%) rotate(-45deg); animation-delay: 0.6s; }
+.connection:nth-child(4) { bottom: 20%; left: 30%; transform: rotate(30deg); animation-delay: 0.9s; }
+.connection:nth-child(5) { bottom: 20%; right: 30%; transform: rotate(-30deg); animation-delay: 1.2s; }
+.connection:nth-child(6) { top: 30%; left: 50%; transform: translateX(-50%) rotate(180deg); animation-delay: 1.5s; }
+
+@keyframes pulseConnection {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
 }
 
 /* EXCELLENCE SECTION */
@@ -906,50 +1065,73 @@ const particleStyle = (i) => {
   color: #64748b;
 }
 
-/* TECHNOLOGY SECTION */
+/* TECHNOLOGY SECTION - UPDATED */
 .section-technology {
   padding: 80px 0;
   background: #f8fafc;
 }
 
-.tech-stack-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 32px;
-  max-width: 900px;
+.single-tech-card-wrapper {
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.tech-category {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
+.single-tech-card {
+  padding: 40px !important;
   border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
 }
 
-.tech-category:hover {
+.single-tech-card:hover {
   border-color: #C4922C;
-  box-shadow: 0 10px 25px rgba(196, 146, 44, 0.1);
+  box-shadow: 0 15px 35px rgba(196, 146, 44, 0.1) !important;
+  transform: translateY(-4px);
 }
 
-.tech-category-title {
-  color: #193762;
-  font-weight: 600;
-  font-size: 1.125rem;
+.tech-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  justify-items: center;
+  align-items: center;
 }
 
-.tech-items {
+.tech-icon-item {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
 }
 
-.tech-item {
+.tech-icon-item:hover {
+  transform: translateY(-5px);
+}
+
+.tech-icon-circle {
+  width: 80px;
+  height: 80px;
+  background: rgba(25, 55, 98, 0.08);
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  color: #64748b;
-  font-size: 0.95rem;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.tech-icon-item:hover .tech-icon-circle {
+  background: rgba(196, 146, 44, 0.1);
+}
+
+.tech-icon-item:hover .v-icon {
+  color: #C4922C !important;
+}
+
+.tech-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #193762;
+  text-align: center;
 }
 
 /* FINAL CTA SECTION */
@@ -1041,6 +1223,11 @@ const particleStyle = (i) => {
   .cta-title {
     font-size: 2.25rem;
   }
+  
+  .tech-icons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1067,8 +1254,18 @@ const particleStyle = (i) => {
     padding: 40px 24px !important;
   }
   
-  .tech-stack-grid {
-    grid-template-columns: 1fr;
+  .tech-icons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .tech-icon-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .tech-name {
+    font-size: 1rem;
   }
 }
 
@@ -1088,24 +1285,133 @@ const particleStyle = (i) => {
     width: 100%;
     justify-content: center;
   }
+  
+  .tech-icons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .tech-icon-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .tech-name {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-icons-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .product-card,
-  .compact-product-card,
   .excellence-card,
-  .tech-category,
+  .single-tech-card,
+  .tech-icon-item,
   .cta-primary,
   .btn-elevated,
   .animate-fade-up,
   .particle,
   .shield-inner,
   .risk-level,
-  .ring {
+  .ring,
+  .layer,
+  .approval-step,
+  .connection {
     animation: none !important;
     transition: none !important;
     transform: none !important;
   }
+}
+
+
+/* PRODUCT IMAGE STYLES - Add to your existing styles */
+.product-visual {
+  background: rgba(25, 55, 98, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.visual-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 280px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease-in-out;
+  filter: drop-shadow(0 4px 8px rgba(25, 55, 98, 0.1));
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+  filter: drop-shadow(0 8px 16px rgba(25, 55, 98, 0.15));
+}
+
+/* Responsive image adjustments */
+@media (max-width: 960px) {
+  .product-image {
+    max-height: 220px;
+  }
+  
+  .product-visual {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-image {
+    max-height: 180px;
+  }
+  
+  .product-visual {
+    min-height: 200px;
+    padding: 30px !important;
+  }
+}
+
+/* Optional: Add subtle background effect */
+.product-visual::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(25, 55, 98, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Remove old visual styles that are no longer needed */
+.shield-visual,
+.risk-visual,
+.resilience-visual,
+.compliance-visual,
+.exceptions-visual,
+.resource-visual,
+.risk-levels,
+.resilience-rings,
+.compliance-layers,
+.exception-approvals,
+.resource-connections,
+.ring,
+.layer,
+.approval-step,
+.connection {
+  display: none;
 }
 </style>

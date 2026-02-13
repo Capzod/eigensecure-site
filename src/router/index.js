@@ -15,4 +15,15 @@ const router = createRouter({
   routes
 })
 
+// Force scroll to top BEFORE navigation
+router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0)
+  next()
+})
+
+// Force scroll to top AFTER navigation
+router.afterEach(() => {
+  window.scrollTo(0, 0)
+})
+
 export default router

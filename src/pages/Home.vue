@@ -17,15 +17,12 @@
       <v-container fluid class="hero-container">
         <v-row align="center" class="h-100">
           <v-col cols="12" md="7" class="hero-content-column">
-            <!-- Logo & Title -->
+            <!-- Badge -->
             <div class="hero-badge animate-fade-up">
-              <div class="logo-title">
-                <h1 class="company-logo">eigenSecure</h1>
-                <v-chip color="white" variant="flat" size="small" class="glow ml-4">
-                  <v-icon start size="small" color="#193762">mdi-shield-star</v-icon>
-                  ENTERPRISE SECURITY
-                </v-chip>
-              </div>
+              <v-chip color="white" variant="flat" size="small" class="glow">
+                <v-icon start size="small" color="#193762">mdi-shield-star</v-icon>
+                ENTERPRISE SECURITY
+              </v-chip>
             </div>
 
             <!-- Main Headline -->
@@ -74,54 +71,21 @@
             </div>
           </v-col>
 
-          <!-- Visual Column - CONCENTRIC SHIELD LAYERS -->
+          <!-- Visual Column - COMPANY LOGO -->
           <v-col cols="12" md="5" class="hero-visual-column">
-            <div class="shield-concentric-wrapper">
-              <div class="shield-concentric-container">
-                <!-- Layer 3 - Outer outline (largest) -->
-                <div class="shield-layer concentric-outer">
-                  <v-icon size="400" color="rgba(255,255,255,0.15)" class="shield-outline-icon">mdi-shield-outline</v-icon>
-                </div>
-                
-                <!-- Layer 2 - Middle outline -->
-                <div class="shield-layer concentric-middle">
-                  <v-icon size="290" color="rgba(255,255,255,0.25)" class="shield-outline-icon">mdi-shield-outline</v-icon>
-                </div>
-                
-                <!-- Layer 1 - Main solid shield (smallest) -->
-                <div class="shield-layer concentric-solid">
-                  <v-icon size="200" color="white" class="shield-solid-icon">mdi-shield</v-icon>
-                </div>
-                
-                <!-- Subtle glow -->
-                <div class="shield-concentric-glow"></div>
-              </div>
-              
-              <!-- Stats Overlay -->
-              <div class="stats-overlay">
-                <div class="stat">
-                  <div class="stat-number">99.9%</div>
-                  <div class="stat-label">Uptime</div>
-                </div>
-                <div class="stat">
-                  <div class="stat-number">24/7</div>
-                  <div class="stat-label">Monitoring</div>
-                </div>
-                <div class="stat">
-                  <div class="stat-number">Zero</div>
-                  <div class="stat-label">Breaches</div>
-                </div>
-              </div>
+            <div class="logo-container">
+              <img src="/02.png" alt="eigenSecure Logo" class="company-logo-image" />
+              <div class="logo-glow"></div>
             </div>
           </v-col>
         </v-row>
       </v-container>
     </section>
 
-    <!-- LAYERS OF PROTECTION SECTION - HONEYCOMB VERSION -->
-    <v-sheet class="section-layers-honeycomb">
+    <!-- LAYERS OF PROTECTION - VUETIFY CAROUSEL WITH BOTTOM NAVIGATION -->
+    <v-sheet class="section-carousel">
       <v-container>
-        <div class="text-center mb-12">
+        <div class="text-center mb-8">
           <v-chip color="#193762" variant="flat" class="mb-4" size="small">
             THE LAYERS OF PROTECTION
           </v-chip>
@@ -130,143 +94,84 @@
             <span class="text-#193762">Security Simplified.</span> Governance Owned.
           </h2>
           <p class="section-subtitle elegant-subtitle">
-            Click any hexagon to explore our protection layers
+            Explore our multi-layered approach to security governance
           </p>
         </div>
 
-        <!-- Honeycomb Container -->
-        <div 
-          class="honeycomb-container" 
-          :class="{ 'has-active': activeLayer !== null }"
-          @click.self="closeActiveLayer"
+        <!-- Vuetify Carousel with Bottom Navigation -->
+        <v-carousel
+          v-model="carouselIndex"
+          cycle
+          interval="5000"
+          hide-delimiter-background
+          show-arrows
+          delimiter-icon="mdi-circle"
+          class="layers-carousel"
         >
-          <!-- Background Overlay (BELOW hexagon) -->
-          <div 
-            v-if="activeLayer !== null" 
-            class="honeycomb-background-overlay"
-            @click="closeActiveLayer"
-          ></div>
-
-          <!-- Honeycomb Grid -->
-          <div class="honeycomb-grid">
-            <!-- Row 1: Hexagons 1, 2, 3 -->
-            <div class="honeycomb-row row-1">
-              <div 
-                v-for="index in [0, 1, 2]" 
-                :key="index"
-                class="honeycomb-hexagon-wrapper"
-                :class="{
-                  'active': activeLayer === index,
-                  'inactive': activeLayer !== null && activeLayer !== index
-                }"
-              >
-                <div 
-                  class="honeycomb-hexagon"
-                  @click="activateLayer(index)"
-                  :style="getHexagonStyle(index)"
-                >
-                  <!-- Normal State Content -->
-                  <div class="hexagon-normal-content">
-                    <div class="hexagon-number">{{ index + 1 }}</div>
-                    <div class="hexagon-title">{{ layers[index].title }}</div>
-                    <div class="hexagon-icon">
-                      <v-icon size="32" color="#193762">mdi-shield-check</v-icon>
-                    </div>
-                  </div>
-                  
-                  <!-- Expanded State Content (hidden by default) -->
-                  <div class="hexagon-expanded-content" v-if="activeLayer === index">
-                    <div class="expanded-description">
-                      {{ layers[index].description }}
-                    </div>
-                    <div class="expanded-close">
-                    </div>
-                  </div>
-                </div>
+          <v-carousel-item
+            v-for="(layer, i) in layers"
+            :key="i"
+            :value="i"
+          >
+            <div class="carousel-item-content">
+              <div class="carousel-number">{{ i + 1 }}</div>
+              <h3 class="carousel-title">{{ layer.title }}</h3>
+              <p class="carousel-description">{{ layer.description }}</p>
+              <div class="carousel-icon">
+                <v-icon size="48" color="#C4922C">mdi-shield-outline</v-icon>
               </div>
             </div>
+          </v-carousel-item>
 
-            <!-- Row 2: Hexagons 4, 5 (offset) -->
-            <div class="honeycomb-row row-2">
-              <div 
-                v-for="index in [3, 4]" 
-                :key="index"
-                class="honeycomb-hexagon-wrapper"
-                :class="{
-                  'active': activeLayer === index,
-                  'inactive': activeLayer !== null && activeLayer !== index
-                }"
-              >
-                <div 
-                  class="honeycomb-hexagon"
-                  @click="activateLayer(index)"
-                  :style="getHexagonStyle(index)"
-                >
-                  <!-- Normal State Content -->
-                  <div class="hexagon-normal-content">
-                    <div class="hexagon-number">{{ index + 1 }}</div>
-                    <div class="hexagon-title">{{ layers[index].title }}</div>
-                    <div class="hexagon-icon">
-                      <v-icon size="32" color="#193762">mdi-shield-check</v-icon>
-                    </div>
-                  </div>
-                  
-                  <!-- Expanded State Content (hidden by default) -->
-                  <div class="hexagon-expanded-content" v-if="activeLayer === index">
-                    <div class="expanded-description">
-                      {{ layers[index].description }}
-                    </div>
-                    <div class="expanded-close">
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <!-- Custom Navigation: Arrows + Dots in Bottom Middle -->
+          <template v-slot:prev="{ props }">
+            <v-btn
+              icon
+              variant="flat"
+              color="#193762"
+              class="carousel-nav-btn prev-btn"
+              @click="props.onClick"
+              aria-label="Previous slide"
+            >
+              <v-icon color="white">mdi-chevron-left</v-icon>
+            </v-btn>
+          </template>
 
-            <!-- Row 3: Hexagons 6, 7, 8 -->
-            <div class="honeycomb-row row-3">
-              <div 
-                v-for="index in [5, 6, 7]" 
-                :key="index"
-                class="honeycomb-hexagon-wrapper"
-                :class="{
-                  'active': activeLayer === index,
-                  'inactive': activeLayer !== null && activeLayer !== index
-                }"
-              >
-                <div 
-                  class="honeycomb-hexagon"
-                  @click="activateLayer(index)"
-                  :style="getHexagonStyle(index)"
-                >
-                  <!-- Normal State Content -->
-                  <div class="hexagon-normal-content">
-                    <div class="hexagon-number">{{ index + 1 }}</div>
-                    <div class="hexagon-title">{{ layers[index].title }}</div>
-                    <div class="hexagon-icon">
-                      <v-icon size="32" color="#193762">mdi-shield-check</v-icon>
-                    </div>
-                  </div>
-                  
-                  <!-- Expanded State Content (hidden by default) -->
-                  <div class="hexagon-expanded-content" v-if="activeLayer === index">
-                    <div class="expanded-description">
-                      {{ layers[index].description }}
-                    </div>
-                    <div class="expanded-close">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <template v-slot:next="{ props }">
+            <v-btn
+              icon
+              variant="flat"
+              color="#193762"
+              class="carousel-nav-btn next-btn"
+              @click="props.onClick"
+              aria-label="Next slide"
+            >
+              <v-icon color="white">mdi-chevron-right</v-icon>
+            </v-btn>
+          </template>
+
+          <!-- Custom Dots Container -->
+          <template v-slot:delimiter="{ index, isActive, toggle }">
+            <button
+              class="custom-carousel-dot"
+              :class="{ 'active': isActive }"
+              @click="toggle"
+              :aria-label="`Go to slide ${index + 1}`"
+            >
+              <span class="dot-number">{{ index + 1 }}</span>
+            </button>
+          </template>
+        </v-carousel>
+
+        <!-- Navigation Hint -->
+        <div class="carousel-navigation-hint text-center mt-4">
+          <span class="text-medium-emphasis">{{ carouselIndex + 1 }} / {{ layers.length }}</span>
         </div>
       </v-container>
     </v-sheet>
 
-    <!-- CORE SERVICES SECTION -->
-    <v-sheet class="section-services">
+    <!-- CORE SERVICES - HONEYCOMB STRUCTURE (1-2-3 / 4-5 / 6-7-8 LAYOUT) WITH ICONS + TEXT ONLY -->
+    <v-sheet class="section-services-honeycomb">
       <v-container>
         <div class="text-center mb-12">
           <v-chip color="#193762" variant="flat" class="mb-4" size="small">
@@ -281,55 +186,82 @@
           </p>
         </div>
 
-        <v-row class="justify-center">
-          <v-col
-            v-for="(service, index) in services"
-            :key="service.title"
-            cols="12"
-            md="6"
-            lg="4"
-            class="d-flex"
-          >
-            <v-card 
-              class="service-card pa-6 h-100"
-              :class="`animate-card delay-${index}`"
-              hover
-              rounded="lg"
-            >
-              <div class="service-icon-wrapper">
-                <v-icon 
-                  size="56" 
-                  color="#193762"
-                  class="service-icon"
+        <!-- Honeycomb Container -->
+        <div class="honeycomb-container">
+          <!-- Honeycomb Grid - 1-2-3 / 4-5 / 6-7-8 Layout -->
+          <div class="honeycomb-grid">
+            <!-- Row 1: Hexagons 1, 2, 3 -->
+            <div class="honeycomb-row row-1">
+              <div 
+                v-for="index in [0, 1, 2]" 
+                :key="index"
+                class="honeycomb-hexagon-wrapper"
+              >
+                <div 
+                  class="honeycomb-hexagon"
+                  :style="getHexagonStyle(index)"
                 >
-                  {{ service.icon }}
-                </v-icon>
+                  <!-- Icon + Text Only (No Numbers) -->
+                  <div class="hexagon-content">
+                    <div class="hexagon-icon">
+                      <v-icon size="40" color="#193762">{{ services[index].icon }}</v-icon>
+                    </div>
+                    <div class="hexagon-title">{{ services[index].title }}</div>
+                    <div class="hexagon-description">{{ services[index].description }}</div>
+                  </div>
+                </div>
               </div>
+            </div>
 
-              <h3 class="service-title mt-8 mb-4">{{ service.title }}</h3>
-              <p class="service-description">
-                {{ service.description }}
-              </p>
-              
-              <div v-if="service.detailedDescription" class="service-detailed mt-4">
-                <p class="service-detailed-text">{{ service.detailedDescription }}</p>
-              </div>
-
-              <div class="service-action mt-6">
-                <v-btn
-                  variant="text"
-                  color="#193762"
-                  :to="service.link"
-                  class="service-link"
-                  aria-label="Learn more about this service"
+            <!-- Row 2: Hexagons 4, 5 (centered, offset) -->
+            <div class="honeycomb-row row-2">
+              <div class="row-2-spacer"></div>
+              <div 
+                v-for="index in [3, 4]" 
+                :key="index"
+                class="honeycomb-hexagon-wrapper"
+              >
+                <div 
+                  class="honeycomb-hexagon"
+                  :style="getHexagonStyle(index)"
                 >
-                  <span class="btn-text">Learn More</span>
-                  <v-icon end>mdi-arrow-right</v-icon>
-                </v-btn>
+                  <!-- Icon + Text Only (No Numbers) -->
+                  <div class="hexagon-content">
+                    <div class="hexagon-icon">
+                      <v-icon size="40" color="#193762">{{ services[index].icon }}</v-icon>
+                    </div>
+                    <div class="hexagon-title">{{ services[index].title }}</div>
+                    <div class="hexagon-description">{{ services[index].description }}</div>
+                  </div>
+                </div>
               </div>
-            </v-card>
-          </v-col>
-        </v-row>
+              <div class="row-2-spacer"></div>
+            </div>
+
+            <!-- Row 3: Hexagons 6, 7, 8 -->
+            <div class="honeycomb-row row-3">
+              <div 
+                v-for="index in [5, 6, 7]" 
+                :key="index"
+                class="honeycomb-hexagon-wrapper"
+              >
+                <div 
+                  class="honeycomb-hexagon"
+                  :style="getHexagonStyle(index)"
+                >
+                  <!-- Icon + Text Only (No Numbers) -->
+                  <div class="hexagon-content">
+                    <div class="hexagon-icon">
+                      <v-icon size="40" color="#193762">{{ services[index].icon }}</v-icon>
+                    </div>
+                    <div class="hexagon-title">{{ services[index].title }}</div>
+                    <div class="hexagon-description">{{ services[index].description }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </v-container>
     </v-sheet>
 
@@ -353,8 +285,8 @@
 
         <v-row class="justify-center">
           <v-col
-            v-for="(usps, index) in usps"
-            :key="usps.title"
+            v-for="(usp, index) in usps"
+            :key="usp.title"
             cols="12"
             md="6"
             lg="4"
@@ -376,13 +308,13 @@
                   color="#193762"
                   class="usp-icon"
                 >
-                  {{ usps.icon }}
+                  {{ usp.icon }}
                 </v-icon>
               </div>
 
-              <h3 class="usp-title mt-6 mb-4">{{ usps.title }}</h3>
+              <h3 class="usp-title mt-6 mb-4">{{ usp.title }}</h3>
               <p class="usp-description">
-                {{ usps.description }}
+                {{ usp.description }}
               </p>
             </v-card>
           </v-col>
@@ -507,6 +439,8 @@ import { ref } from 'vue'
 
 const demoMailTo = 'mailto:sales@eigensecure.com?subject=Request%20a%20Demo%20-%20eigenSecure&body=Request%20a%20Demo%20—%20Client%20Submission%20Template%0A%0AI%20would%20like%20to%20request%20a%20personalized%20demo%20of%20the%20eigenSecure%20platform.%20Please%20find%20my%20details%20below:%0A%0ACompany%20Name:%20%0AContact%20Person:%20%0ADesignation:%20%0AEmail:%20%0APhone:%20%0AExpected%20Deployment%20Scale%20(SME%20/%20Enterprise):%20%0A%0AKindly%20share%20the%20available%20demo%20slots%20and%20any%20additional%20information%20required%20for%20scheduling.'
 
+const carouselIndex = ref(0)
+
 const layers = ref([
   { title: 'Evolving Threats?', description: 'Our platform equips you with real-time risk intelligence and proactive safeguards to stay ahead.' },
   { title: 'Compliance Overload?', description: 'We streamline ISO, NIST, and internal controls through intelligent automation.' },
@@ -518,75 +452,46 @@ const layers = ref([
   { title: 'Decision Fatigue?', description: 'Structured intelligence turns governance data into clear, actionable decisions.' }
 ])
 
-const activeLayer = ref(null)
-
-const activateLayer = (index) => {
-  activeLayer.value = index
-}
-
-const closeActiveLayer = () => {
-  activeLayer.value = null
-}
-
-const getHexagonStyle = (index) => {
-  const colors = [
-    'rgba(25, 55, 98, 0.1)',
-    'rgba(25, 55, 98, 0.12)',
-    'rgba(25, 55, 98, 0.14)',
-    'rgba(25, 55, 98, 0.16)',
-    'rgba(25, 55, 98, 0.18)',
-    'rgba(25, 55, 98, 0.2)',
-    'rgba(25, 55, 98, 0.22)',
-    'rgba(25, 55, 98, 0.24)'
-  ]
-  
-  return {
-    '--hex-color': colors[index]
-  }
-}
-
 const services = ref([
   { 
     title: 'Customized ISMS Tool', 
-    description: 'One platform — own your controls, own your governance, own your security roadmap.',
-    detailedDescription: 'Define your own control sets, map risks directly to policies, automate compliance tracking, and generate audit-ready reports with ease. Whether you are starting your ISMS journey or enhancing an existing mature framework, the solution scales with your business, ensuring clarity, consistency, and continuous improvement at every stage.',
-    icon: 'mdi-shield-check', 
-    link: '/products#isms' 
+    description: 'One platform — own your controls & governance, own your security roadmap.',
+    icon: 'mdi-shield-check'
   },
   { 
     title: 'Risk Management', 
     description: 'Own your risks. Lead with informed decisions.',
-    detailedDescription: 'Take control of your organization\'s risk landscape with real-time visibility, structured assessments, and intelligent prioritization. Our Risk Management module empowers leadership teams to identify threats early, evaluate their impact, and align mitigation strategies with business objectives — strengthening governance and improving overall decision-making.',
-    icon: 'mdi-chart-timeline-variant', 
-    link: '/products#risk' 
-  },
-  { 
-    title: 'Business Continuity & Disaster Recovery', 
-    description: 'Own your resilience. Stay ready for anything.',
-    detailedDescription: 'Stay prepared for the unexpected with a robust continuity and recovery framework. This module helps you plan, document, and test your response strategies, ensuring your critical operations remain functional during disruptions. With dynamic workflows and automated recovery actions, you can maintain resilience and restore operations swiftly and confidently.',
-    icon: 'mdi-backup-restore', 
-    link: '/products#bcdr' 
+    icon: 'mdi-chart-timeline-variant'
   },
   { 
     title: 'IT Attestation & Compliance', 
     description: 'Own your compliance. Inspire confidence through accountability.',
-    detailedDescription: 'Simplify compliance and demonstrate accountability with a centralized system for audits, controls, and evidence management. Whether you\'re aligning with ISO 27001, NIST, SOC, or internal governance standards, our Compliance module streamlines documentation, reduces manual effort, and keeps your organization audit-ready at all times.',
-    icon: 'mdi-file-document-check', 
-    link: '/products#compliance' 
+    icon: 'mdi-file-document-check'
   },
   { 
     title: 'Security Exceptions Management', 
     description: 'Own your exceptions. Eliminate blind spots, strengthen governance.',
-    detailedDescription: 'Gain full transparency into accepted risks and deviations with structured exception tracking. This module enables teams to document exceptions, evaluate residual risk, define timelines, and maintain governance integrity. It helps organizations prevent blind spots, enforce accountability, and ensure exceptions are managed systematically — not forgotten.',
-    icon: 'mdi-alert-circle-check', 
-    link: '/products#exceptions' 
+    icon: 'mdi-alert-circle-check'
   },
   { 
-    title: 'Identity & Access Management', 
+    title: 'Identity & Access Management (IAM)', 
     description: 'Own your access. Enforce trust by design.',
-    detailedDescription: 'Establish strong identity governance across users, applications, and systems. This service helps you define access policies, manage entitlements, monitor privileged access, and align identity controls with security and compliance requirements. By embedding accountability into access decisions, you reduce risk, prevent misuse, and ensure the right access is granted for the right reasons—always.',
-    icon: 'mdi-account-key', 
-    link: '/products#iam' 
+    icon: 'mdi-account-key'
+  },
+  { 
+    title: 'AI & Agentic Enablement', 
+    description: 'Own your intelligence. Lead with AI augmented Governance.',
+    icon: 'mdi-robot'
+  },
+  { 
+    title: 'Incident Detection & Response', 
+    description: 'Own your response. Act before impact spreads.',
+    icon: 'mdi-alert-decagram'
+  },
+  { 
+    title: 'Core Directory & Oversight', 
+    description: 'Own your visibility. Govern with precision.',
+    icon: 'mdi-view-dashboard'
   }
 ])
 
@@ -617,6 +522,23 @@ const usps = ref([
     icon: 'mdi-shield-crown' 
   }
 ])
+
+const getHexagonStyle = (index) => {
+  const colors = [
+    'rgba(25, 55, 98, 0.1)',
+    'rgba(25, 55, 98, 0.12)',
+    'rgba(25, 55, 98, 0.14)',
+    'rgba(25, 55, 98, 0.16)',
+    'rgba(25, 55, 98, 0.18)',
+    'rgba(25, 55, 98, 0.2)',
+    'rgba(25, 55, 98, 0.22)',
+    'rgba(25, 55, 98, 0.24)'
+  ]
+  
+  return {
+    '--hex-color': colors[index]
+  }
+}
 
 const particleStyle = (i) => {
   const size = Math.random() * 4 + 1
@@ -727,20 +649,6 @@ const particleStyle = (i) => {
 
 .hero-content-column {
   color: white;
-}
-
-.logo-title {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.company-logo {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 1px;
-  margin: 0;
 }
 
 .hero-badge .glow {
@@ -854,214 +762,205 @@ const particleStyle = (i) => {
   flex: 1;
 }
 
-/* Trust Indicators */
-.trust-indicators {
-  max-width: 600px;
-}
-
-.trust-title {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.trust-icons {
+/* Hero Visual Column - COMPANY LOGO */
+.hero-visual-column {
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.trust-icon {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.875rem;
 }
 
-/* CONCENTRIC SHIELD LAYERS */
-.shield-concentric-wrapper {
+.logo-container {
   position: relative;
   width: 100%;
   max-width: 400px;
   height: 400px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.shield-concentric-container {
+.company-logo-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   position: relative;
-  width: 220px;
-  height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.shield-layer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.concentric-solid {
   z-index: 3;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+  animation: breatheLogo 4s ease-in-out infinite;
 }
 
-.concentric-middle {
-  z-index: 2;
-  filter: blur(0.5px);
-}
-
-.concentric-outer {
-  z-index: 1;
-  filter: blur(1px);
-}
-
-
-@keyframes rotateRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Glow effect */
-.shield-concentric-glow {
+.logo-glow {
   position: absolute;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.03) 40%,
-    transparent 70%
-  );
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
   border-radius: 50%;
-  z-index: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: pulseGlow 4s ease-in-out infinite;
 }
 
-/* Breathing animations */
-.concentric-outer {
-  animation: breatheOuter 12s ease-in-out infinite;
+@keyframes breatheLogo {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.5));
+  }
 }
 
-.concentric-middle {
-  animation: breatheMiddle 10s ease-in-out infinite;
-  animation-delay: 2s;
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
-.concentric-solid {
-  animation: breatheSolid 8s ease-in-out infinite;
-  animation-delay: 1s;
+/* CAROUSEL SECTION - WITH BOTTOM NAVIGATION */
+.section-carousel {
+  padding: 80px 0;
+  background: white;
 }
 
-@keyframes breatheOuter {
-  0%, 100% { opacity: 0.15; }
-  50% { opacity: 0.2; }
+.layers-carousel {
+  height: 450px;
+  box-shadow: 0 20px 40px rgba(11, 28, 45, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
 }
 
-@keyframes breatheMiddle {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 0.3; }
-}
-
-@keyframes breatheSolid {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 1; }
-}
-
-/* Hover effects */
-.shield-concentric-container:hover .concentric-outer {
-  opacity: 0.25;
-  transform: translate(-50%, -50%) scale(1.02);
-}
-
-.shield-concentric-container:hover .concentric-middle {
-  opacity: 0.35;
-  transform: translate(-50%, -50%) scale(1.015);
-}
-
-.shield-concentric-container:hover .concentric-solid {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.01);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
-}
-
-/* Stats Overlay */
-.stats-overlay {
-  position: absolute;
-  bottom: -100px;
-  left: 0;
-  right: 0;
+.carousel-item-content {
+  height: 100%;
   display: flex;
-  justify-content: space-around;
-  background: rgba(11, 28, 45, 0.8);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 2rem;
-  z-index: 5;
-}
-
-.stat {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 48px;
+  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  position: relative;
 }
 
-.stat-number {
-  font-size: 1.5rem;
+.carousel-number {
+  width: 48px;
+  height: 48px;
+  background: #193762;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
   font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+.carousel-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #193762;
+  margin-bottom: 16px;
+}
+
+.carousel-description {
+  font-size: 1.125rem;
+  color: #64748b;
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+.carousel-icon {
+  margin-top: 16px;
+}
+
+/* Bottom Navigation Container */
+.v-carousel__controls {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  padding: 8px 16px !important;
+  border-radius: 40px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: auto !important;
+}
+
+/* Navigation Buttons */
+.carousel-nav-btn {
+  background: #193762 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.carousel-nav-btn:hover {
+  background: #C4922C !important;
+  transform: scale(1.1) !important;
+}
+
+.prev-btn {
+  margin-right: 8px;
+}
+
+.next-btn {
+  margin-left: 8px;
+}
+
+/* Custom Carousel Dots */
+.custom-carousel-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(25, 55, 98, 0.1);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 4px;
+}
+
+.custom-carousel-dot:hover {
+  background: rgba(25, 55, 98, 0.2);
+  transform: scale(1.1);
+}
+
+.custom-carousel-dot.active {
+  background: #193762;
+  border-color: #C4922C;
+}
+
+.custom-carousel-dot.active .dot-number {
   color: white;
 }
 
-.stat-label {
+.dot-number {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 600;
+  color: #193762;
 }
 
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.carousel-navigation-hint {
+  color: #64748b;
+  font-size: 0.875rem;
 }
 
-.animate-fade-up {
-  animation: fadeUp 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-.delay-4 { animation-delay: 0.8s; }
-
-.animate-card {
-  animation: fadeUp 0.6s ease-out forwards;
-  opacity: 0;
-}
-
-/* LAYERS HONEYCOMB SECTION */
-.section-layers-honeycomb {
+/* SERVICES HONEYCOMB SECTION - 1-2-3 / 4-5 / 6-7-8 LAYOUT */
+.section-services-honeycomb {
   padding: 120px 0;
-  background: white;
+  background: #f8fafc;
   position: relative;
   overflow: visible;
 }
@@ -1069,28 +968,10 @@ const particleStyle = (i) => {
 /* Honeycomb Container */
 .honeycomb-container {
   position: relative;
-  min-height: 600px;
+  min-height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease;
-}
-
-/* Background Overlay (BELOW the hexagon) */
-.honeycomb-background-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(11, 28, 45, 0.6);
-  z-index: 90;
-  animation: fadeInOverlay 0s ease-out;
-}
-
-@keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 /* Honeycomb Grid */
@@ -1107,49 +988,39 @@ const particleStyle = (i) => {
 .honeycomb-row {
   display: flex;
   justify-content: center;
-  gap: 0;
+  gap: 20px;
+  width: 100%;
 }
 
-/* Honeycomb row positioning */
+/* Honeycomb row positioning - 1-2-3 / 4-5 / 6-7-8 */
 .row-1 {
   margin-bottom: -30px;
 }
 
 .row-2 {
   margin-bottom: -30px;
-  transform: translateX(0px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-2-spacer {
+  width: 240px; /* Matches hexagon width + margin */
+  visibility: hidden;
 }
 
 .row-3 {
-  /* Last row, no margin needed */
+  margin-bottom: 0;
 }
 
 /* Honeycomb Hexagon */
 .honeycomb-hexagon-wrapper {
   position: relative;
-  width: 200px;
-  height: 220px;
+  width: 220px;
+  height: 242px;
   margin: 0 10px;
-  transition: all 0s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s ease;
   z-index: 1;
-}
-
-/* Active state - CLEAN EXPANSION */
-.honeycomb-hexagon-wrapper.active {
-  z-index: 1000 !important;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.8) !important; /* Larger scale */
-  margin: 0;
-  width: 200px;
-  height: 220px;
-}
-
-.honeycomb-hexagon-wrapper.inactive {
-  opacity: 0.9;
-  transform: scale(0.7);
-  pointer-events: none;
 }
 
 .honeycomb-hexagon {
@@ -1158,102 +1029,42 @@ const particleStyle = (i) => {
   height: 100%;
   background: var(--hex-color, rgba(25, 55, 98, 0.1));
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+  transition: all 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  border: 2px solid transparent;
 }
 
 .honeycomb-hexagon:hover {
-  transform: translateY(-5px) scale(1.05);
+  transform: translateY(-5px) scale(1.02);
   background: rgba(196, 146, 44, 0.15);
+  border-color: rgba(196, 146, 44, 0.3);
   box-shadow: 0 15px 30px rgba(196, 146, 44, 0.2);
 }
 
-.honeycomb-hexagon-wrapper.active .honeycomb-hexagon {
-  background: white !important; /* SOLID WHITE - no blur/overlay */
-  box-shadow: 0 25px 50px rgba(11, 28, 45, 0.3);
-  transform: none;
-  z-index: 101;
-}
-
-/* Optional: Add a pseudo-element for extra coverage */
-.honeycomb-hexagon-wrapper.active .honeycomb-hexagon::after {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: white;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  z-index: -1;
-}
-
-.hexagon-border {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  border: 2px solid #193762;
-  opacity: 0.2;
-  transition: all 0.4s ease;
-}
-
-.honeycomb-hexagon:hover .hexagon-border {
-  opacity: 0.8;
-  border-color: #C4922C;
-}
-
-.honeycomb-hexagon-wrapper.active .hexagon-border {
-  border-color: #C4922C;
-  opacity: 1;
-  border-width: 3px;
-}
-
-/* Normal State Content (visible when NOT active) */
-.hexagon-normal-content {
+/* Hexagon Content - Icon + Text Only (No Numbers) */
+/* Hexagon Content - Icon + Text Only (No Numbers) */
+.hexagon-content {
   text-align: center;
-  padding: 45px 20px;
+  padding: 15px 12px;
   color: #193762;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;  /* ADD THIS - centers vertically */
+  gap: 6px;
   z-index: 2;
   position: relative;
   width: 100%;
   height: 100%;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.honeycomb-hexagon-wrapper.active .hexagon-normal-content {
-  opacity: 0; /* Hide normal content when expanded */
-}
-
-.hexagon-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #193762;
-  opacity: 0.8;
-}
-
-.hexagon-title {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.3;
-  transition: all 0.3s ease;
-}
-
-.honeycomb-hexagon:hover .hexagon-title {
-  color: #C4922C;
+  overflow-y: hidden;
 }
 
 .hexagon-icon {
-  margin-top: 8px;
+  margin-top: 5px;
   transition: all 0.3s ease;
 }
 
@@ -1261,132 +1072,41 @@ const particleStyle = (i) => {
   color: #C4922C !important;
 }
 
-/* Expanded State Content (visible ONLY when active) */
-.hexagon-expanded-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 85%;
-  height: 85%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 30px;
-  z-index: 102;
-  opacity: 0;
-  animation: fadeInExpandedContent 0.3s ease-out 0.2s forwards;
-}
-
-
-
-@keyframes fadeInExpandedContent {
-  from { 
-    opacity: 0; 
-    transform: translate(-50%, -50%) scale(0.95); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translate(-50%, -50%) scale(1); 
-  }
-}
-
-.expanded-description {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: #64748b;
-  text-align: center;
-  width: 100%;
-}
-
-.expanded-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 103;
-}
-
-.expanded-close .v-btn:hover {
-  background: #C4922C;
-  color: white;
-}
-
-/* SERVICES SECTION */
-.section-services {
-  padding: 120px 0;
-  background: #f8fafc;
-}
-
-.service-card {
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.service-card:hover {
-  border-color: #C4922C;
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(196, 146, 44, 0.1);
-}
-
-.service-icon-wrapper {
-  width: 80px;
-  height: 80px;
-  background: rgba(25, 55, 98, 0.1);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  transition: all 0.3s ease;
-}
-
-.service-card:hover .service-icon-wrapper {
-  background: rgba(196, 146, 44, 0.1);
-}
-
-.service-card:hover .service-icon {
-  color: #C4922C;
-}
-
-.service-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #193762;
-}
-
-.service-description {
-  line-height: 1.6;
+.hexagon-title {
   font-size: 1rem;
-  color: #64748b;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #193762;
+  transition: all 0.3s ease;
 }
 
-.service-detailed {
-  margin-top: 1rem;
-}
-
-.service-detailed-text {
-  line-height: 1.7;
-  font-size: 0.95rem;
-  color: #64748b;
-  font-style: italic;
-}
-
-.service-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.service-link:hover {
+.honeycomb-hexagon:hover .hexagon-title {
   color: #C4922C;
 }
 
-.service-link:hover .v-icon {
-  color: #C4922C;
-  transform: translateX(4px);
-  transition: transform 0.3s ease;
+.hexagon-description {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin-top: 4px;
+  max-height: 80px;
+  overflow-y: auto;
+  padding: 0 5px;
+}
+
+/* Custom scrollbar for description */
+.hexagon-description::-webkit-scrollbar {
+  width: 3px;
+}
+
+.hexagon-description::-webkit-scrollbar-track {
+  background: rgba(25, 55, 98, 0.05);
+  border-radius: 3px;
+}
+
+.hexagon-description::-webkit-scrollbar-thumb {
+  background: rgba(196, 146, 44, 0.3);
+  border-radius: 3px;
 }
 
 /* WHY EIGENSECURE SECTION */
@@ -1617,69 +1337,86 @@ const particleStyle = (i) => {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ACCESSIBILITY & PERFORMANCE */
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-card,
-  .particle,
-  .shield-layer,
-  .accent-ring,
-  .shield-concentric-container:hover .shield-layer,
-  .service-link:hover .v-icon,
-  .footer-link:hover,
-  .honeycomb-hexagon-wrapper,
-  .honeycomb-hexagon,
-  .honeycomb-background-overlay,
-  .hexagon-expanded-content,
-  .honeycomb-grid {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Reduce particles on mobile for performance */
-@media (max-width: 768px) {
-  .particle {
-    display: none;
-  }
+.animate-fade-up {
+  animation: fadeUp 0.8s ease-out forwards;
+  opacity: 0;
 }
 
-/* RESPONSIVE - HONEYCOMB */
-@media (max-width: 1200px) {
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+.animate-card {
+  animation: fadeUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.delay-0 { animation-delay: 0.1s; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.5s; }
+.delay-5 { animation-delay: 0.6s; }
+.delay-6 { animation-delay: 0.7s; }
+.delay-7 { animation-delay: 0.8s; }
+
+/* RESPONSIVE */
+@media (max-width: 1400px) {
   .honeycomb-hexagon-wrapper {
-    width: 160px;
-    height: 176px;
+    width: 200px;
+    height: 220px;
     margin: 0 8px;
   }
   
-  .row-2 {
-    transform: translateX(0px);
+  .row-2-spacer {
+    width: 216px;
   }
   
-  .honeycomb-hexagon-wrapper.active {
-    transform: translate(-50%, -50%) scale(1.6) !important;
+  .hexagon-content {
+    padding: 18px 12px;
   }
   
-  .hexagon-normal-content {
-    padding: 20px 15px;
-    gap: 10px;
+  .hexagon-description {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .honeycomb-hexagon-wrapper {
+    width: 180px;
+    height: 198px;
+    margin: 0 6px;
   }
   
-  .hexagon-number {
-    font-size: 1.25rem;
+  .row-2-spacer {
+    width: 192px;
+  }
+  
+  .hexagon-content {
+    padding: 16px 10px;
+    gap: 6px;
   }
   
   .hexagon-title {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
   }
   
-  .expanded-description {
-    font-size: 1rem;
-  }
-  
-  .hexagon-expanded-content {
-    padding: 30px 20px;
+  .hexagon-description {
+    font-size: 0.75rem;
+    max-height: 70px;
   }
 }
 
@@ -1694,46 +1431,13 @@ const particleStyle = (i) => {
     font-size: 2.5rem;
   }
   
-  .company-logo {
-    font-size: 2rem;
-  }
-  
-  .logo-title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  
-  .shield-concentric-wrapper {
+  .logo-container {
     height: 300px;
     margin-top: 3rem;
   }
   
-  .shield-concentric-container {
-    width: 180px;
-    height: 180px;
-  }
-  
-  .concentric-solid .v-icon {
-    font-size: 120px !important;
-  }
-  
-  .concentric-middle .v-icon {
-    font-size: 140px !important;
-  }
-  
-  .concentric-outer .v-icon {
-    font-size: 160px !important;
-  }
-  
-  .shield-concentric-glow {
-    width: 180px;
-    height: 180px;
-  }
-  
-  .accent-ring {
-    width: 50px;
-    height: 50px;
+  .company-logo-image {
+    max-height: 280px;
   }
   
   .elegant-title,
@@ -1741,50 +1445,48 @@ const particleStyle = (i) => {
     font-size: 2.25rem;
   }
   
-  /* Honeycomb Responsive */
-  .honeycomb-hexagon-wrapper {
-    width: 130px;
-    height: 143px;
-    margin: 0 6px;
+  .carousel-title {
+    font-size: 1.75rem;
   }
   
-  .row-2 {
-    transform: translateX(0px);
-    margin-bottom: -24px;
+  .carousel-description {
+    font-size: 1rem;
+  }
+  
+  .layers-carousel {
+    height: 450px;
+  }
+  
+  .honeycomb-hexagon-wrapper {
+    width: 150px;
+    height: 165px;
+    margin: 0 5px;
+  }
+  
+  .row-2-spacer {
+    width: 160px;
   }
   
   .row-1 {
     margin-bottom: -24px;
   }
   
-  .honeycomb-hexagon-wrapper.active {
-    transform: translate(-50%, -50%) scale(1.5) !important;
+  .row-2 {
+    margin-bottom: -24px;
   }
   
-  .hexagon-normal-content {
-    padding: 15px 10px;
-    gap: 8px;
-  }
-  
-  .hexagon-number {
-    font-size: 1.125rem;
+  .hexagon-content {
+    padding: 14px 8px;
+    gap: 5px;
   }
   
   .hexagon-title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   
-  .expanded-description {
-    font-size: 0.875rem;
-  }
-  
-  .hexagon-expanded-content {
-    padding: 20px 15px;
-  }
-  
-  .expanded-close .v-btn {
-    width: 32px !important;
-    height: 32px !important;
+  .hexagon-description {
+    font-size: 0.7rem;
+    max-height: 60px;
   }
   
   .footer-brand {
@@ -1795,67 +1497,41 @@ const particleStyle = (i) => {
 
 @media (max-width: 768px) {
   .honeycomb-hexagon-wrapper {
-    width: 100px;
-    height: 110px;
-    margin: 0 5px;
+    width: 120px;
+    height: 132px;
+    margin: 0 4px;
   }
   
-  .row-2 {
-    transform: translateX(0px);
-    margin-bottom: -20px;
+  .row-2-spacer {
+    width: 128px;
   }
   
   .row-1 {
     margin-bottom: -20px;
   }
   
-  .honeycomb-hexagon-wrapper.active {
-    transform: translate(-50%, -50%) scale(1.4) !important;
+  .row-2 {
+    margin-bottom: -20px;
   }
   
-  .hexagon-normal-content {
-    padding: 10px 8px;
-    gap: 6px;
-  }
-  
-  .hexagon-number {
-    font-size: 1rem;
+  .hexagon-content {
+    padding: 12px 6px;
+    gap: 4px;
   }
   
   .hexagon-title {
+    font-size: 0.7rem;
+  }
+  
+  .hexagon-description {
     font-size: 0.65rem;
-  }
-  
-  .expanded-description {
-    font-size: 0.75rem;
-  }
-  
-  .hexagon-expanded-content {
-    padding: 15px 10px;
-  }
-  
-  .expanded-close {
-    top: 10px;
-    right: 10px;
-  }
-  
-  .expanded-close .v-btn {
-    width: 28px !important;
-    height: 28px !important;
-  }
-  
-  .expanded-close .v-icon {
-    font-size: 14px !important;
+    max-height: 50px;
   }
 }
 
 @media (max-width: 600px) {
   .hero-main-title {
     font-size: 2rem;
-  }
-  
-  .company-logo {
-    font-size: 1.75rem;
   }
   
   .hero-subtitle,
@@ -1877,112 +1553,71 @@ const particleStyle = (i) => {
     justify-content: center;
   }
   
-  .trust-icons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .shield-concentric-wrapper {
+  .logo-container {
     height: 250px;
   }
   
-  .shield-concentric-container {
-    width: 150px;
-    height: 150px;
+  .company-logo-image {
+    max-height: 230px;
   }
   
-  .concentric-solid .v-icon {
-    font-size: 100px !important;
+  .carousel-item-content {
+    padding: 32px;
   }
   
-  .concentric-middle .v-icon {
-    font-size: 120px !important;
-  }
-  
-  .concentric-outer .v-icon {
-    font-size: 140px !important;
-  }
-  
-  .shield-concentric-glow {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .accent-ring {
+  .carousel-number {
     width: 40px;
     height: 40px;
-  }
-  
-  .accent-dot {
-    width: 6px;
-    height: 6px;
-  }
-  
-  .stats-overlay {
-    padding: 0.75rem;
-  }
-  
-  .stat-number {
     font-size: 1.25rem;
+    margin-bottom: 16px;
   }
   
-  .stat-label {
-    font-size: 0.65rem;
+  .carousel-title {
+    font-size: 1.5rem;
   }
   
-  /* Honeycomb Mobile */
+  .carousel-description {
+    font-size: 0.95rem;
+  }
+  
+  .layers-carousel {
+    height: 500px;
+  }
+  
   .honeycomb-hexagon-wrapper {
-    width: 80px;
-    height: 88px;
-    margin: 0 4px;
+    width: 100px;
+    height: 110px;
+    margin: 0 3px;
   }
   
-  .row-2 {
-    transform: translateX(0px);
-    margin-bottom: -16px;
+  .row-2-spacer {
+    width: 106px;
   }
   
   .row-1 {
     margin-bottom: -16px;
   }
   
+  .row-2 {
+    margin-bottom: -16px;
+  }
+  
   .honeycomb-container {
-    min-height: 400px;
+    min-height: 550px;
   }
   
-  .honeycomb-hexagon-wrapper.active {
-    transform: translate(-50%, -50%) scale(1.3) !important;
-  }
-  
-  .hexagon-normal-content {
-    padding: 8px 6px;
-    gap: 4px;
-  }
-  
-  .hexagon-number {
-    font-size: 0.875rem;
+  .hexagon-content {
+    padding: 10px 5px;
+    gap: 3px;
   }
   
   .hexagon-title {
-    font-size: 0.55rem;
-  }
-  
-  .expanded-description {
     font-size: 0.65rem;
   }
   
-  .hexagon-expanded-content {
-    padding: 12px 8px;
-  }
-  
-  .expanded-close {
-    top: 8px;
-    right: 8px;
-  }
-  
-  .expanded-close .v-btn {
-    width: 24px !important;
-    height: 24px !important;
+  .hexagon-description {
+    font-size: 0.6rem;
+    max-height: 45px;
   }
   
   .footer-section {
@@ -1995,111 +1630,116 @@ const particleStyle = (i) => {
 }
 
 @media (max-width: 480px) {
+  .hero-main-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-actions {
+    gap: 0.75rem;
+  }
+  
+  .cta-primary,
+  .cta-secondary {
+    padding: 0 1.5rem !important;
+    height: 48px !important;
+    font-size: 0.95rem !important;
+  }
+  
+  .logo-container {
+    height: 200px;
+  }
+  
+  .company-logo-image {
+    max-height: 180px;
+  }
+  
+  .carousel-item-content {
+    padding: 24px;
+  }
+  
+  .carousel-number {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .carousel-title {
+    font-size: 1.25rem;
+  }
+  
+  .carousel-description {
+    font-size: 0.875rem;
+  }
+  
+  .layers-carousel {
+    height: 450px;
+  }
+  
+  .v-carousel__controls {
+    padding: 6px 12px !important;
+  }
+  
+  .carousel-nav-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .custom-carousel-dot {
+    width: 28px;
+    height: 28px;
+  }
+  
   .honeycomb-hexagon-wrapper {
-    width: 65px;
-    height: 72px;
-    margin: 0 3px;
-  }
-  
-  .row-2 {
-    transform: translateX(35.5px);
-    margin-bottom: -12px;
-  }
-  
-  .row-1 {
-    margin-bottom: -12px;
-  }
-  
-  .honeycomb-hexagon-wrapper.active {
-    transform: translate(-50%, -50%) scale(1.2) !important;
-  }
-  
-  .hexagon-normal-content {
-    padding: 6px 4px;
-    gap: 3px;
-  }
-  
-  .hexagon-title {
-    font-size: 0.5rem;
-    line-height: 1.1;
-  }
-  
-  .expanded-description {
-    font-size: 0.55rem;
-  }
-  
-  .hexagon-expanded-content {
-    padding: 10px 6px;
-  }
-}
-
-/* Very small mobile (like iPhone SE) */
-@media (max-width: 375px) {
-  .honeycomb-hexagon-wrapper {
-    width: 55px;
-    height: 61px;
+    width: 80px;
+    height: 88px;
     margin: 0 2px;
   }
   
-  .row-2 {
-    transform: translateX(29.5px);
-    margin-bottom: -10px;
+  .row-2-spacer {
+    width: 84px;
   }
   
   .row-1 {
-    margin-bottom: -10px;
+    margin-bottom: -12px;
   }
   
-  .honeycomb-hexagon-wrapper.active {
-    transform: translate(-50%, -50%) scale(1.1) !important;
+  .row-2 {
+    margin-bottom: -12px;
   }
   
-  .hexagon-normal-content {
-    padding: 4px 3px;
+  .hexagon-content {
+    padding: 8px 4px;
     gap: 2px;
   }
   
-  .hexagon-number {
-    font-size: 0.75rem;
-  }
-  
   .hexagon-title {
-    font-size: 0.45rem;
+    font-size: 0.55rem;
   }
   
-  .expanded-description {
+  .hexagon-description {
     font-size: 0.5rem;
-  }
-  
-  .hexagon-expanded-content {
-    padding: 8px 5px;
-  }
-  
-  .expanded-close {
-    top: 6px;
-    right: 6px;
-  }
-  
-  .expanded-close .v-btn {
-    width: 20px !important;
-    height: 20px !important;
-  }
-  
-  .expanded-close .v-icon {
-    font-size: 12px !important;
+    max-height: 40px;
   }
 }
 
-/* Accessibility: Keyboard navigation */
-.honeycomb-hexagon:focus {
-  outline: 2px solid #C4922C;
-  outline-offset: 4px;
-}
-
-/* Add this to the very end of your CSS */
-.honeycomb-hexagon-wrapper.active .honeycomb-hexagon {
-  background: white !important;
-  -webkit-backdrop-filter: blur(0px) !important;
-  backdrop-filter: blur(0px) !important;
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-card,
+  .particle,
+  .company-logo-image,
+  .logo-glow,
+  .honeycomb-hexagon-wrapper,
+  .honeycomb-hexagon,
+  .custom-carousel-dot,
+  .carousel-nav-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
 </style>

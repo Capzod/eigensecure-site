@@ -14,10 +14,6 @@
       <v-container fluid class="hero-container">
         <v-row align="center" class="h-100">
           <v-col cols="12" class="text-center">
-            <v-chip color="white" variant="flat" size="small" class="hero-badge mb-4">
-              <v-icon start size="small" color="#193762">mdi-account-group</v-icon>
-              ABOUT EIGENSECURE
-            </v-chip>
             
             <h1 class="hero-title animate-fade-up">
               Empowering organizations to own<br class="d-none d-md-block" />
@@ -154,51 +150,101 @@
           </p>
         </div>
 
-        <v-row>
-          <v-col
-            v-for="(value, index) in values"
-            :key="index"
-            cols="12"
-            md="6"
-            lg="4"
-            class="d-flex"
-          >
-            <v-card 
-              class="value-card pa-6 h-100"
-              :class="`animate-card delay-${index}`"
-              hover
-              rounded="lg"
-              :color="value.color"
-              variant="flat"
-            >
-              <div class="value-icon-wrapper mb-4">
-                <v-icon 
-                  size="48" 
-                  color="white"
-                  class="value-icon"
-                >
-                  {{ value.icon }}
-                </v-icon>
-              </div>
+        <!-- MISSION & VALUES - Updated Grid -->
+<v-row>
+  <!-- First row - 3 cards -->
+  <v-col
+    v-for="(value, index) in values.slice(0, 3)"
+    :key="index"
+    cols="12"
+    md="6"
+    lg="4"
+    class="d-flex"
+  >
+    <v-card 
+      class="value-card pa-6 h-100"
+      :class="`animate-card delay-${index}`"
+      hover
+      rounded="lg"
+      :color="value.color"
+      variant="flat"
+    >
+      <!-- Card content remains the same -->
+      <div class="value-icon-wrapper mb-4">
+        <v-icon size="48" color="white" class="value-icon">
+          {{ value.icon }}
+        </v-icon>
+      </div>
 
-              <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
-              <p class="value-description">
-                {{ value.description }}
-              </p>
-              
-              <div class="value-highlights mt-4">
-                <div 
-                  v-for="(highlight, hIndex) in value.highlights" 
-                  :key="hIndex"
-                  class="value-highlight"
-                >
-                  <v-icon size="x-small" color="white" class="mr-2">mdi-check</v-icon>
-                  <span>{{ highlight }}</span>
-                </div>
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
+      <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
+      <p class="value-description">
+        {{ value.description }}
+      </p>
+      
+      <div class="value-highlights mt-4">
+        <div 
+          v-for="(highlight, hIndex) in value.highlights" 
+          :key="hIndex"
+          class="value-highlight"
+        >
+          <v-icon size="x-small" color="white" class="mr-2">mdi-check</v-icon>
+          <span>{{ highlight }}</span>
+        </div>
+      </div>
+    </v-card>
+  </v-col>
+
+  <!-- Second row - 2 centered cards -->
+  <v-col
+    cols="12"
+    class="d-flex justify-center"
+  >
+    <div class="d-flex flex-wrap justify-center" style="gap: 24px; max-width: 900px;">
+      <v-col
+        v-for="(value, index) in values.slice(3, 5)"
+        :key="index + 3"
+        cols="12"
+        md="6"
+        lg="5"
+        class="pa-0"
+        style="flex: 0 0 auto; min-width: 300px;"
+      >
+        <v-card 
+          class="value-card pa-6 h-100"
+          :class="`animate-card delay-${index + 3}`"
+          hover
+          rounded="lg"
+          :color="value.color"
+          variant="flat"
+          style="height: 100%;"
+        >
+          <!-- Card content remains the same -->
+          <div class="value-icon-wrapper mb-4">
+            <v-icon size="48" color="white" class="value-icon">
+              {{ value.icon }}
+            </v-icon>
+          </div>
+
+          <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
+          <p class="value-description">
+            {{ value.description }}
+          </p>
+          
+          <div class="value-highlights mt-4">
+            <div 
+              v-for="(highlight, hIndex) in value.highlights" 
+              :key="hIndex"
+              class="value-highlight"
+            >
+              <v-icon size="x-small" color="white" class="mr-2">mdi-check</v-icon>
+              <span>{{ highlight }}</span>
+            </div>
+          </div>
+        </v-card>
+      </v-col>
+    </div>
+  </v-col>
+</v-row>
       </v-container>
     </v-sheet>
 

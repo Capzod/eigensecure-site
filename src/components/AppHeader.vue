@@ -54,8 +54,9 @@ const route = useRoute()
 
 const navItems = [
   { path: '/', label: 'Home' },
-  { path: '/product', label: 'Product' },
-  { path: '/about', label: 'About' }
+  { path: '/about', label: 'About Us' },
+  { path: '/product', label: 'Product & Services' }
+  
 ]
 
 const demoMailTo = 'mailto:sales@eigensecure.com?subject=Request%20a%20Demo%20-%20eigenSecure'
