@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
-import multer from 'multer'
+import formidable from 'formidable'
+import fs from 'fs'
 
 export const config = {
   api: {
@@ -7,33 +8,21 @@ export const config = {
   },
 }
 
-const upload = multer({
-  storage: multer.memoryStorage()
-})
-
 export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
 
-  upload.single('cv')(req, res, async function (err) {
+  const form = new formidable.IncomingForm()
 
-    if (err) return res.status(500).json({ error: err })
+  form.parse(req, async (err, fields, files) => {
 
-    const {
-      fullName,
-      email,
-      phone,
-      expertise,
-      experience,
-      currentRole,
-      portfolio,
-      noticePeriod,
-      note
-    } = req.body
+    if (err) {
+      return res.status(500).json({ error: err })
+    }
 
-    const file = req.file
+    const file = files.cv?.[0]
 
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -48,23 +37,23 @@ export default async function handler(req, res) {
       await transporter.sendMail({
         from: process.env.MAIL_USER,
         to: process.env.MAIL_USER,
-        replyTo: email,
+        replyTo: fields.email,
         subject: 'New Job Application 🚀',
         text: `
-Name: ${fullName}
-Email: ${email}
-Phone: ${phone}
-Role: ${currentRole}
-Expertise: ${expertise}
-Experience: ${experience}
-Notice Period: ${noticePeriod}
-Portfolio: ${portfolio}
-Why eigenSecure: ${note}
+Name: ${fields.fullName}
+Email: ${fields.email}
+Phone: ${fields.phone}
+Role: ${fields.currentRole}
+Expertise: ${fields.expertise}
+Experience: ${fields.experience}
+Notice Period: ${fields.noticePeriod}
+Portfolio: ${fields.portfolio}
+Why eigenSecure: ${fields.note}
         `,
         attachments: [
           {
-            filename: file.originalname,
-            content: file.buffer
+            filename: file.originalFilename,
+            content: fs.readFileSync(file.filepath)
           }
         ]
       })
