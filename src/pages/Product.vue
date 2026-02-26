@@ -567,7 +567,7 @@ const excellenceFeatures = ref([
 const techStack = ref([
   { 
     name: 'Blazor Web Assembly', 
-    icon: 'mdi-language-csharp',  // Font Awesome icon
+    icon: 'mdi mdi-console',  // Font Awesome icon
     isFontAwesome: false 
   },
   { 
@@ -1351,7 +1351,7 @@ const particleStyle = (i) => {
 
 .product-image {
   max-width: 100%;
-  max-height: 280px;
+  max-height: 380px;
   width: auto;
   height: auto;
   object-fit: contain;

@@ -1,29 +1,41 @@
 <template>
   <v-sheet class="about-page" color="transparent">
     
-    <!-- HERO SECTION -->
-    <section class="hero-section">
+    <!-- HERO SECTION - UNIQUE FOR ABOUT US -->
+    <section class="hero-section about-hero">
       <div class="hero-background">
-        <div class="bg-gradient"></div>
+        <div class="bg-gradient about-gradient"></div>
         <div class="grid-overlay"></div>
+        <!-- Unique floating hexagons for About page -->
+        <div class="floating-hexagons">
+          <div class="floating-hexagon h1"></div>
+          <div class="floating-hexagon h2"></div>
+          <div class="floating-hexagon h3"></div>
+          <div class="floating-hexagon h4"></div>
+          <div class="floating-hexagon h5"></div>
+        </div>
         <div class="particles">
-          <div v-for="i in 20" :key="i" class="particle" :style="particleStyle(i)"></div>
+          <div v-for="i in 30" :key="i" class="particle" :style="particleStyle(i)"></div>
         </div>
       </div>
 
       <v-container fluid class="hero-container">
         <v-row align="center" class="h-100">
           <v-col cols="12" class="text-center">
+          
             
-            <h1 class="hero-title animate-fade-up">
-              Empowering organizations to own<br class="d-none d-md-block" />
-              their security governance.
+            <h1 class="hero-title about-title animate-fade-up">
+              <span class="title-line">Empowering organizations to own</span>
+              <span class="title-line accent-line">
+                <span class="accent-text">their security governance.</span>
+              </span>
             </h1>
             
             <p class="hero-subtitle animate-fade-up delay-1">
               A remote-first cybersecurity organization helping modern enterprises transform 
               the way they understand, implement, and own their security frameworks.
             </p>
+            
           </v-col>
         </v-row>
       </v-container>
@@ -59,7 +71,7 @@
           </div>
         </div>
 
-        <!-- TIMELINE -->
+        <!-- TIMELINE - WITH ENHANCED "TODAY" SECTION -->
         <div class="timeline-section">
           <div class="text-center mb-12">
             <v-chip color="#C4922C" variant="flat" class="mb-4" size="small">
@@ -85,28 +97,42 @@
               v-for="(item, index) in timelineItems" 
               :key="index"
               class="timeline-item"
-              :class="{ 'left': index % 2 === 0, 'right': index % 2 === 1 }"
+              :class="{ 
+                'left': index % 2 === 0, 
+                'right': index % 2 === 1,
+                'today-item': item.year === 'Today'
+              }"
               :ref="el => timelineRefs[index] = el"
             >
-              <!-- HEXAGON Timeline Dot - ABOVE the line -->
-              <div class="timeline-hexagon" :style="{ borderColor: item.color }">
+              <!-- HEXAGON Timeline Dot - Enhanced for Today -->
+              <div 
+                class="timeline-hexagon" 
+                :class="{ 'today-hexagon': item.year === 'Today' }"
+                :style="{ borderColor: item.color }"
+              >
                 <div class="hexagon-inner" :style="{ backgroundColor: item.color }">
                   <v-icon size="small" color="white">{{ item.icon }}</v-icon>
                 </div>
+                <!-- Special glow for Today -->
+                <div v-if="item.year === 'Today'" class="today-glow"></div>
               </div>
 
-              <!-- Timeline Card -->
+              <!-- Timeline Card - Enhanced for Today -->
               <v-hover v-slot="{ isHovering, props }">
                 <div 
                   class="timeline-card"
+                  :class="{ 
+                    'hovered': isHovering,
+                    'today-card': item.year === 'Today',
+                    'today-active': item.year === 'Today' && timelineProgress > 80
+                  }"
                   v-bind="props"
-                  :class="{ 'hovered': isHovering }"
                 >
                   <div class="timeline-card-content">
                     <!-- Year/Title -->
                     <div class="timeline-header">
-                      <div class="timeline-year">{{ item.year }}</div>
-                      <h4 class="timeline-card-title">{{ item.title }}</h4>
+                      <div class="timeline-year" :class="{ 'today-year': item.year === 'Today' }">{{ item.year }}</div>
+                      <h4 class="timeline-card-title" :class="{ 'today-title': item.year === 'Today' }">{{ item.title }}</h4>
                     </div>
                     
                     <!-- Description -->
@@ -134,7 +160,7 @@
       </v-container>
     </v-sheet>
 
-    <!-- MISSION & VALUES -->
+    <!-- MISSION & VALUES (unchanged) -->
     <v-sheet class="section-values">
       <v-container>
         <div class="text-center mb-12">
@@ -150,105 +176,102 @@
           </p>
         </div>
 
-        <!-- MISSION & VALUES - Updated Grid -->
-<v-row>
-  <!-- First row - 3 cards -->
-  <v-col
-    v-for="(value, index) in values.slice(0, 3)"
-    :key="index"
-    cols="12"
-    md="6"
-    lg="4"
-    class="d-flex"
-  >
-    <v-card 
-      class="value-card pa-6 h-100"
-      :class="`animate-card delay-${index}`"
-      hover
-      rounded="lg"
-      :color="value.color"
-      variant="flat"
-    >
-      <!-- Card content remains the same -->
-      <div class="value-icon-wrapper mb-4">
-        <v-icon size="48" color="white" class="value-icon">
-          {{ value.icon }}
-        </v-icon>
-      </div>
-
-      <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
-      <p class="value-description">
-        {{ value.description }}
-      </p>
-      
-      <div class="value-highlights mt-4">
-        <div 
-          v-for="(highlight, hIndex) in value.highlights" 
-          :key="hIndex"
-          class="value-highlight"
-        >
-          <v-icon size="x-small" color="white" class="mr-2">mdi-check</v-icon>
-          <span>{{ highlight }}</span>
-        </div>
-      </div>
-    </v-card>
-  </v-col>
-
-  <!-- Second row - 2 centered cards -->
-  <v-col
-    cols="12"
-    class="d-flex justify-center"
-  >
-    <div class="d-flex flex-wrap justify-center" style="gap: 24px; max-width: 900px;">
-      <v-col
-        v-for="(value, index) in values.slice(3, 5)"
-        :key="index + 3"
-        cols="12"
-        md="6"
-        lg="5"
-        class="pa-0"
-        style="flex: 0 0 auto; min-width: 300px;"
-      >
-        <v-card 
-          class="value-card pa-6 h-100"
-          :class="`animate-card delay-${index + 3}`"
-          hover
-          rounded="lg"
-          :color="value.color"
-          variant="flat"
-          style="height: 100%;"
-        >
-          <!-- Card content remains the same -->
-          <div class="value-icon-wrapper mb-4">
-            <v-icon size="48" color="white" class="value-icon">
-              {{ value.icon }}
-            </v-icon>
-          </div>
-
-          <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
-          <p class="value-description">
-            {{ value.description }}
-          </p>
-          
-          <div class="value-highlights mt-4">
-            <div 
-              v-for="(highlight, hIndex) in value.highlights" 
-              :key="hIndex"
-              class="value-highlight"
+        <!-- MISSION & VALUES - 6 CARDS (2 rows of 3) -->
+        <v-row>
+          <!-- Row 1: First 3 cards -->
+          <v-col
+            v-for="(value, index) in values.slice(0, 3)"
+            :key="index"
+            cols="12"
+            md="6"
+            lg="4"
+            class="d-flex"
+          >
+            <v-card 
+              class="value-card pa-6 h-100"
+              :class="`animate-card delay-${index}`"
+              hover
+              rounded="lg"
+              :color="value.color"
+              variant="flat"
             >
-              <v-icon size="x-small" color="white" class="mr-2">mdi-check</v-icon>
-              <span>{{ highlight }}</span>
-            </div>
-          </div>
-        </v-card>
-      </v-col>
-    </div>
-  </v-col>
-</v-row>
+              <div class="value-icon-wrapper mb-4">
+                <v-icon 
+                  size="48" 
+                  :color="value.color === '#f8fafc' ? '#C4922C' : 'white'" 
+                  class="value-icon"
+                >
+                  {{ value.icon }}
+                </v-icon>
+              </div>
+
+              <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
+              <p class="value-description">
+                {{ value.description }}
+              </p>
+              
+              <div class="value-highlights mt-4">
+                <div 
+                  v-for="(highlight, hIndex) in value.highlights" 
+                  :key="hIndex"
+                  class="value-highlight"
+                >
+                  <v-icon size="x-small" color="#C4922C" class="mr-2">mdi-check</v-icon>
+                  <span :class="{ 'text-white': value.color === '#193762' }">{{ highlight }}</span>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+
+          <!-- Row 2: Next 3 cards -->
+          <v-col
+            v-for="(value, index) in values.slice(3, 6)"
+            :key="index + 3"
+            cols="12"
+            md="6"
+            lg="4"
+            class="d-flex"
+          >
+            <v-card 
+              class="value-card pa-6 h-100"
+              :class="`animate-card delay-${index + 3}`"
+              hover
+              rounded="lg"
+              :color="value.color"
+              variant="flat"
+            >
+              <div class="value-icon-wrapper mb-4">
+                <v-icon 
+                  size="48" 
+                  :color="value.color === '#f8fafc' ? '#C4922C' : 'white'" 
+                  class="value-icon"
+                >
+                  {{ value.icon }}
+                </v-icon>
+              </div>
+
+              <h3 class="value-title mt-4 mb-4">{{ value.title }}</h3>
+              <p class="value-description">
+                {{ value.description }}
+              </p>
+              
+              <div class="value-highlights mt-4">
+                <div 
+                  v-for="(highlight, hIndex) in value.highlights" 
+                  :key="hIndex"
+                  class="value-highlight"
+                >
+                  <v-icon size="x-small" color="#C4922C" class="mr-2">mdi-check</v-icon>
+                  <span :class="{ 'text-white': value.color === '#193762' }">{{ highlight }}</span>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-container>
     </v-sheet>
 
-    <!-- CULTURE & ENVIRONMENT -->
+    <!-- CULTURE & ENVIRONMENT (unchanged) -->
     <v-sheet class="section-culture">
       <v-container>
         <div class="text-center mb-12">
@@ -338,7 +361,7 @@
                 
                 <p class="join-subtitle mb-6">
                   If you're someone who thrives on learning, isn't afraid to experiment, and wants 
-                  to build the future of Cybersecurity & governance technology, eigenSecure might 
+                  to build the future of Cybersecurity & Governance Technology, eigenSecure might 
                   be the place for you.
                 </p>
                 
@@ -376,11 +399,6 @@
                   Apply Now
                 </v-btn>
                 
-                <div class="form-note mt-6 text-center">
-                  <p class="note-text">
-                    Clicking "Apply Now" will open your email client with a pre-filled template
-                  </p>
-                </div>
               </v-card>
             </v-col>
           </v-row>
@@ -451,7 +469,7 @@ const timelineItems = ref([
   }
 ])
 
-// Values
+// Values - Now with 6 cards
 const values = ref([
   {
     title: 'Ownership at the Core',
@@ -464,7 +482,7 @@ const values = ref([
     title: 'People Over Positions',
     description: 'We hire for teams, not job titles. We look for curiosity, initiative, and potential rather than strict labels. If someone shows a hunger to learn and grow, we give them the ecosystem to thrive.',
     icon: 'mdi-account-group',
-    color: '#C4922C',
+    color: '#f8fafc',
     highlights: ['Talent Focused', 'Growth Mindset', 'Potential Over Experience']
   },
   {
@@ -478,7 +496,7 @@ const values = ref([
     title: 'Commitment to Security & Ethics',
     description: 'Our approach combines engineering depth with a strong ethical framework. We align with leading global standards — ISO, NIST, SOC — ensuring everything we deliver meets strict security expectations.',
     icon: 'mdi-shield-check',
-    color: '#C4922C',
+    color: '#f8fafc',
     highlights: ['Ethical Standards', 'Global Compliance', 'Security First']
   },
   {
@@ -487,6 +505,13 @@ const values = ref([
     icon: 'mdi-flask',
     color: '#193762',
     highlights: ['Innovation Culture', 'R&D Focus', 'Continuous Learning']
+  },
+  {
+    title: 'Relentless Innovation',
+    description: 'Innovation is embedded in how we think, design, and deliver. We continuously reimagine systems, refine intelligence, and create solutions that anticipate tomorrow\'s governance needs.',
+    icon: 'mdi-lightbulb-group',
+    color: '#f8fafc',
+    highlights: ['Future-Ready', 'Continuous Improvement', 'Anticipatory Design']
   }
 ])
 
@@ -500,8 +525,8 @@ const culturePillars = ref([
     examples: ['Ownership', 'Voice', 'Exploration', 'Improvement']
   },
   {
-    title: 'Mentorship & Grooming',
-    description: 'Freshers evolve into confident, industry-ready professionals through hands-on exposure, guidance from senior engineers, and opportunities that usually come much later.',
+    title: 'Mentorship',
+    description: 'Graduate Hires evolve into confident, industry-ready professionals through hands-on exposure, guidance from senior engineers, and opportunities that usually come much later.',
     icon: 'mdi-school',
     color: '#C4922C',
     examples: ['Hands-On Learning', 'Senior Guidance', 'Accelerated Growth', 'Real Projects']
@@ -599,10 +624,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* HERO SECTION - Consistent with other pages */
+/* HERO SECTION - UNIQUE FOR ABOUT US */
 .hero-section {
-  height: 60vh;
-  min-height: 500px;
+  height: 70vh;
+  min-height: 600px;
   position: relative;
   overflow: hidden;
   background: #0B1C2D;
@@ -610,6 +635,149 @@ onUnmounted(() => {
   align-items: center;
 }
 
+/* Unique gradient for About page */
+.about-gradient {
+  background: linear-gradient(135deg, 
+    #0B1C2D 0%, 
+    #1a2f4a 30%, 
+    #2a3f5a 70%, 
+    #193762 100%) !important;
+  opacity: 0.95;
+}
+
+/* Floating hexagons animation for About page */
+.floating-hexagons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.floating-hexagon {
+  position: absolute;
+  width: 80px;
+  height: 90px;
+  background: rgba(196, 146, 44, 0.1);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: floatHexagon 20s ease-in-out infinite;
+  border: 1px solid rgba(196, 146, 44, 0.2);
+}
+
+.h1 {
+  top: 15%;
+  left: 5%;
+  width: 60px;
+  height: 68px;
+  animation-delay: 0s;
+}
+
+.h2 {
+  bottom: 20%;
+  right: 8%;
+  width: 100px;
+  height: 113px;
+  animation-delay: 2s;
+  background: rgba(25, 55, 98, 0.15);
+  border-color: rgba(25, 55, 98, 0.3);
+}
+
+.h3 {
+  top: 40%;
+  right: 15%;
+  width: 40px;
+  height: 45px;
+  animation-delay: 4s;
+}
+
+.h4 {
+  bottom: 30%;
+  left: 10%;
+  width: 70px;
+  height: 79px;
+  animation-delay: 6s;
+  background: rgba(196, 146, 44, 0.08);
+}
+
+.h5 {
+  top: 60%;
+  left: 20%;
+  width: 50px;
+  height: 56px;
+  animation-delay: 8s;
+}
+
+@keyframes floatHexagon {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-30px) rotate(10deg);
+    opacity: 0.6;
+  }
+}
+
+/* About badge */
+.about-badge {
+  display: inline-block;
+}
+
+.glow-chip {
+  background: #C4922C !important;
+  color: white !important;
+  box-shadow: 0 0 30px rgba(196, 146, 44, 0.5);
+  padding: 8px 16px !important;
+  font-weight: 600;
+}
+
+/* About stats */
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #C4922C;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* About title enhancements */
+.about-title {
+  margin-bottom: 1.5rem;
+}
+
+.title-line {
+  display: block;
+}
+
+.accent-line {
+  margin-top: 0.5rem;
+}
+
+.accent-text {
+  color: #C4922C;
+  display: inline-block;
+  font-weight: 800;
+}
+
+/* Hero Background (keeping original) */
 .hero-background {
   position: absolute;
   top: 0;
@@ -696,10 +864,6 @@ onUnmounted(() => {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.hero-badge {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
 /* OUR STORY SECTION */
 .section-story {
   padding: 100px 0;
@@ -718,7 +882,7 @@ onUnmounted(() => {
   font-weight: 400;
 }
 
-/* TIMELINE */
+/* TIMELINE - ENHANCED FOR TODAY */
 .timeline-section {
   margin-top: 80px;
 }
@@ -746,7 +910,7 @@ onUnmounted(() => {
   width: 4px;
   background: rgba(25, 55, 98, 0.1);
   transform: translateX(-50%);
-  z-index: 0; /* Lower than hexagon */
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -761,7 +925,7 @@ onUnmounted(() => {
   z-index: 0;
 }
 
-/* HEXAGON TIMELINE DOT - ABOVE the line (higher z-index) */
+/* HEXAGON TIMELINE DOT - ENHANCED FOR TODAY */
 .timeline-hexagon {
   position: absolute;
   left: 50%;
@@ -769,7 +933,7 @@ onUnmounted(() => {
   width: 56px;
   height: 56px;
   transform: translateX(-50%);
-  z-index: 1000; /* Higher than timeline line */
+  z-index: 1000;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: white;
   border: 4px solid;
@@ -778,6 +942,50 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* TODAY HEXAGON SPECIAL EFFECTS */
+.today-hexagon {
+  width: 70px !important;
+  height: 70px !important;
+  border-width: 5px !important;
+  border-color: #C4922C !important;
+  animation: pulseHexagon 2s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(196, 146, 44, 0.6);
+}
+
+.today-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle at center, rgba(196, 146, 44, 0.4) 0%, rgba(196, 146, 44, 0) 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes pulseHexagon {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 0 30px rgba(196, 146, 44, 0.6);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.15);
+    box-shadow: 0 0 50px rgba(196, 146, 44, 0.9);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 .timeline-hexagon::before {
@@ -816,7 +1024,7 @@ onUnmounted(() => {
 .timeline-item {
   position: relative;
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   display: flex;
   align-items: flex-start;
   opacity: 0.4;
@@ -839,6 +1047,7 @@ onUnmounted(() => {
   padding-left: calc(50% + 40px);
 }
 
+/* TIMELINE CARD - ENHANCED FOR TODAY */
 .timeline-card {
   width: 100%;
   max-width: 500px;
@@ -850,6 +1059,101 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+}
+
+/* TODAY CARD SPECIAL EFFECTS */
+.today-card {
+  background: linear-gradient(135deg, #ffffff, #fef9e7) !important;
+  border: 2px solid #C4922C !important;
+  box-shadow: 0 10px 30px rgba(196, 146, 44, 0.2) !important;
+  transform: scale(1.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.today-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(196, 146, 44, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shine 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.today-card.today-active {
+  animation: cardPulse 2s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(196, 146, 44, 0.2);
+  }
+  50% {
+    box-shadow: 0 20px 50px rgba(196, 146, 44, 0.4);
+  }
+}
+
+.today-year {
+  color: #C4922C !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+}
+
+.today-title {
+  color: #193762 !important;
+  font-size: 1.75rem !important;
+  background: linear-gradient(135deg, #193762, #C4922C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.future-element {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(196, 146, 44, 0.3);
+  color: #C4922C;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #C4922C;
+  border-radius: 50%;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
 }
 
 .timeline-card.hovered {
@@ -905,58 +1209,156 @@ onUnmounted(() => {
   gap: 8px;
 }
 
-/* VALUES SECTION */
+/* ===== FIXED VALUES SECTION - WITH GUARANTEED GOLD BORDERS ===== */
 .section-values {
   padding: 100px 0;
   background: #f8fafc;
 }
 
+/* Common value card styles */
 .value-card {
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  position: relative;
+  overflow: visible;
+  border-radius: 12px !important;
 }
 
-.value-card:hover {
+/* Blue cards (dark background) */
+.value-card[color="#193762"] {
+  background: #193762 !important;
+  border: 2px solid transparent !important;
+  color: white;
+}
+
+.value-card[color="#193762"] .value-title,
+.value-card[color="#193762"] .value-description,
+.value-card[color="#193762"] .value-highlight {
+  color: white;
+}
+
+.value-card[color="#193762"] .value-icon-wrapper {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.value-card[color="#193762"]:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+  border-color: #C4922C !important;
 }
 
+.value-card[color="#193762"]:hover .value-icon-wrapper {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Light cards with gold border ALWAYS VISIBLE */
+.v-card.value-card[color="#f8fafc"] {
+  background: #f8fafc !important;
+  border: 2px solid #C4922C !important;
+  border-color: #C4922C !important;
+  border-style: solid !important;
+  border-width: 2px !important;
+  color: #193762;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(196, 146, 44, 0.15);
+}
+
+/* Extra specificity to ensure border shows */
+.v-application .v-card.value-card[color="#f8fafc"] {
+  border: 2px solid #C4922C !important;
+}
+
+/* Light card text colors */
+.value-card[color="#f8fafc"] .value-title {
+  color: #193762;
+}
+
+.value-card[color="#f8fafc"] .value-description {
+  color: #64748b;
+}
+
+.value-card[color="#f8fafc"] .value-highlight {
+  color: #193762;
+}
+
+/* Light card icon styles */
+.value-card[color="#f8fafc"] .value-icon-wrapper {
+  background: rgba(196, 146, 44, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.value-card[color="#f8fafc"] .value-icon {
+  color: #C4922C !important;
+}
+
+.value-card[color="#f8fafc"]:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(196, 146, 44, 0.3) !important;
+  border-color: #C4922C !important;
+}
+
+.value-card[color="#f8fafc"]:hover .value-icon-wrapper {
+  background: rgba(196, 146, 44, 0.2);
+}
+
+/* Common icon wrapper styles */
 .value-icon-wrapper {
   width: 80px;
   height: 80px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
+/* Title styles */
 .value-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: white;
+  line-height: 1.3;
 }
 
+/* Description styles */
 .value-description {
   font-size: 1rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
 }
 
+/* Highlights container */
 .value-highlights {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
+/* Individual highlight items */
 .value-highlight {
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
 }
+
+.value-highlight .v-icon {
+  color: #C4922C !important;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.value-highlight span {
+  line-height: 1.4;
+}
+
+/* Animation delays for cards */
+.delay-0 { animation-delay: 0.1s; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.5s; }
+.delay-5 { animation-delay: 0.6s; }
 
 /* CULTURE SECTION */
 .section-culture {
@@ -1146,8 +1548,16 @@ onUnmounted(() => {
   }
   
   .hero-section {
-    height: 50vh;
-    min-height: 400px;
+    height: 60vh;
+    min-height: 500px;
+  }
+  
+  .about-stats {
+    gap: 20px;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
   }
   
   .timeline-line {
@@ -1162,6 +1572,12 @@ onUnmounted(() => {
   
   .timeline-hexagon {
     left: 32px;
+  }
+  
+  .today-hexagon {
+    left: 32px !important;
+    width: 60px !important;
+    height: 60px !important;
   }
   
   .timeline-card {
@@ -1185,6 +1601,10 @@ onUnmounted(() => {
     font-size: 1.125rem;
   }
   
+  .about-stats {
+    flex-wrap: wrap;
+  }
+  
   .timeline-title {
     font-size: 1.75rem;
   }
@@ -1193,9 +1613,18 @@ onUnmounted(() => {
     font-size: 1.25rem;
   }
   
+  .today-title {
+    font-size: 1.5rem !important;
+  }
+  
   .timeline-hexagon {
     width: 48px;
     height: 48px;
+  }
+  
+  .today-hexagon {
+    width: 55px !important;
+    height: 55px !important;
   }
   
   .join-title {
@@ -1214,9 +1643,18 @@ onUnmounted(() => {
     padding: 100px 0 60px;
   }
   
+  .floating-hexagon {
+    display: none;
+  }
+  
   .timeline-hexagon {
     width: 44px;
     height: 44px;
+  }
+  
+  .today-hexagon {
+    width: 50px !important;
+    height: 50px !important;
   }
   
   .timeline-item {
@@ -1239,7 +1677,11 @@ onUnmounted(() => {
   .pillar-card,
   .join-cta-btn,
   .animate-fade-up,
-  .animate-card {
+  .animate-card,
+  .floating-hexagon,
+  .today-hexagon,
+  .today-glow,
+  .today-card::after {
     animation: none !important;
     transition: none !important;
     transform: none !important;

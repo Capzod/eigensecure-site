@@ -16,20 +16,12 @@
       <!-- Hero Content -->
       <v-container fluid class="hero-container">
         <v-row align="center" class="h-100">
-          <v-col cols="12" md="7" class="hero-content-column">
-            <!-- Badge -->
-            <div class="hero-badge animate-fade-up">
-              <v-chip color="white" variant="flat" size="small" class="glow">
-                <v-icon start size="small" color="#193762">mdi-shield-star</v-icon>
-                ENTERPRISE SECURITY
-              </v-chip>
-            </div>
-
+          <v-col cols="12" md="7" class="hero-content-column d-flex flex-column justify-start pt-16 pt-md-0">
             <!-- Main Headline -->
             <h1 class="hero-main-title animate-fade-up delay-1">
-              <span class="title-line">Own Your Security Governance.</span>
+              <span class="title-line">Own Your Security Governance!</span>
               <span class="title-line accent-line">
-                <span class="accent-text">Not rent it!</span>
+                <span class="accent-text">Not rent it</span>
               </span>
             </h1>
 
@@ -46,11 +38,9 @@
                 color="white"
                 size="x-large"
                 class="cta-primary"
-                :href="demoMailTo"
+                @click="showJoinModal = true"
                 rounded="xl"
-                target="_blank"
-                rel="noopener"
-                aria-label="Book a demo - opens email client"
+                aria-label="Join our team"
               >
                 <v-icon start size="large" color="#193762">mdi-calendar-star</v-icon>
                 <span class="btn-text">Join Us</span>
@@ -102,7 +92,7 @@
         <v-carousel
           v-model="carouselIndex"
           cycle
-          interval="5000"
+          interval="10000"
           hide-delimiter-background
           show-arrows
           delimiter-icon="mdi-circle"
@@ -196,6 +186,11 @@
                 v-for="index in [0, 1, 2]" 
                 :key="index"
                 class="honeycomb-hexagon-wrapper"
+                @click="goToProduct"
+                @keydown.enter="goToProduct"
+                role="link"
+                tabindex="0"
+                style="cursor: pointer;"
               >
                 <div 
                   class="honeycomb-hexagon"
@@ -220,6 +215,11 @@
                 v-for="index in [3, 4]" 
                 :key="index"
                 class="honeycomb-hexagon-wrapper"
+                @click="goToProduct"
+                @keydown.enter="goToProduct"
+                role="link"
+                tabindex="0"
+                style="cursor: pointer;"
               >
                 <div 
                   class="honeycomb-hexagon"
@@ -244,6 +244,11 @@
                 v-for="index in [5, 6, 7]" 
                 :key="index"
                 class="honeycomb-hexagon-wrapper"
+                @click="goToProduct"
+                @keydown.enter="goToProduct"
+                role="link"
+                tabindex="0"
+                style="cursor: pointer;"
               >
                 <div 
                   class="honeycomb-hexagon"
@@ -269,11 +274,8 @@
     <v-sheet class="section-why">
       <v-container>
         <div class="text-center mb-12">
-          <v-chip color="#193762" variant="flat" class="mb-4" size="small">
-            WHY CHOOSE US
-          </v-chip>
           <h2 class="section-title elegant-title">
-            Why <span class="text-#193762">eigenSecure</span>?
+            Why <span class="gold-text">eigen</span><span class="blue-text">Secure</span>?
           </h2>
           <p class="section-subtitle elegant-subtitle">
             We are a governance intelligence partner built for organizations that demand clarity, control, and confidence.
@@ -363,42 +365,55 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="4" class="footer-brand">
-            <h3 class="footer-logo">eigenSecure</h3>
+            <h3 class="footer-logo">
+  <span class="gold-text">eigen</span><span class="blue-text">Secure</span>
+</h3>
             <p class="footer-tagline mt-2">
               Governance intelligence for modern enterprises
             </p>
-            <div class="social-icons mt-6">
-              <v-btn icon variant="text" color="white" class="social-icon">
-                <v-icon>mdi-twitter</v-icon>
-              </v-btn>
-              <v-btn icon variant="text" color="white" class="social-icon">
+            <div class="social-icons mt-4">
+              <!-- LinkedIn -->
+              <v-btn 
+                icon 
+                variant="text" 
+                color="white" 
+                class="social-icon"
+                href="https://linkedin.com/company/eigensecure"
+                target="_blank"
+                rel="noopener"
+              >
                 <v-icon>mdi-linkedin</v-icon>
               </v-btn>
-              <v-btn icon variant="text" color="white" class="social-icon">
-                <v-icon>mdi-facebook</v-icon>
-              </v-btn>
-              <v-btn icon variant="text" color="white" class="social-icon">
-                <v-icon>mdi-youtube</v-icon>
+              
+              <!-- Mail -->
+              <v-btn 
+                icon 
+                variant="text" 
+                color="white" 
+                class="social-icon"
+                href="mailto:info@eigensecure.com"
+              >
+                <v-icon>mdi-email</v-icon>
               </v-btn>
             </div>
           </v-col>
 
           <v-col cols="12" md="4" class="footer-contact">
             <h4 class="footer-heading">Contact Information</h4>
-            <div class="contact-info mt-4">
+            <div class="contact-info mt-3">
               <div class="contact-item">
                 <v-icon size="small" color="white" class="mr-2">mdi-map-marker</v-icon>
                 <span>Oscorp Industries,<br>New York</span>
               </div>
-              <div class="contact-item mt-3">
+              <div class="contact-item mt-2">
                 <v-icon size="small" color="white" class="mr-2">mdi-phone</v-icon>
                 <span>+1 (555) 123-4567</span>
               </div>
-              <div class="contact-item mt-3">
+              <div class="contact-item mt-2">
                 <v-icon size="small" color="white" class="mr-2">mdi-email</v-icon>
                 <span>info@eigensecure.com</span>
               </div>
-              <div class="contact-item mt-3">
+              <div class="contact-item mt-2">
                 <v-icon size="small" color="white" class="mr-2">mdi-clock</v-icon>
                 <span>Mon-Fri: 9:00 AM - 6:00 PM EST</span>
               </div>
@@ -407,35 +422,50 @@
 
           <v-col cols="12" md="4" class="footer-links">
             <h4 class="footer-heading">Quick Links</h4>
-            <div class="footer-links-list mt-4">
-              <a href="/privacy" class="footer-link">Privacy Policy</a>
-              <a href="/terms" class="footer-link">Terms of Service</a>
-              <a href="/license" class="footer-link">License Information</a>
-              <a href="/products" class="footer-link">Products & Services</a>
-              <a href="/contact" class="footer-link">Contact Us</a>
-              <a href="/careers" class="footer-link">Careers</a>
+            <div class="footer-links-list mt-3">
+              <a href="/about" class="footer-link">About Us</a>
+              <a 
+                href="mailto:info@eigensecure.com" 
+                class="footer-link"
+              >
+                Contact Us
+              </a>
+              <a 
+                href="#" 
+                class="footer-link"
+                @click.prevent="openJoinModal"
+              >
+                Careers
+              </a>
             </div>
           </v-col>
         </v-row>
 
-        <v-divider class="my-8" color="rgba(255,255,255,0.2)"></v-divider>
+        <v-divider class="my-4" color="rgba(255,255,255,0.2)"></v-divider>
 
         <div class="footer-bottom text-center">
           <p class="copyright">
             © {{ new Date().getFullYear() }} eigenSecure. All rights reserved.
           </p>
-          <p class="footer-note mt-2">
+          <p class="footer-note mt-1">
             Own Your Security Governance. Not rent it.
           </p>
         </div>
       </v-container>
     </v-footer>
 
+    <!-- Join Us Modal Component -->
+    <JoinUsModal v-model="showJoinModal" />
   </v-sheet>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import JoinUsModal from '@/components/JoinUsModal.vue'
+
+const router = useRouter()
+const showJoinModal = ref(false)
 
 const demoMailTo = 'mailto:sales@eigensecure.com?subject=Request%20a%20Demo%20-%20eigenSecure&body=Request%20a%20Demo%20—%20Client%20Submission%20Template%0A%0AI%20would%20like%20to%20request%20a%20personalized%20demo%20of%20the%20eigenSecure%20platform.%20Please%20find%20my%20details%20below:%0A%0ACompany%20Name:%20%0AContact%20Person:%20%0ADesignation:%20%0AEmail:%20%0APhone:%20%0AExpected%20Deployment%20Scale%20(SME%20/%20Enterprise):%20%0A%0AKindly%20share%20the%20available%20demo%20slots%20and%20any%20additional%20information%20required%20for%20scheduling.'
 
@@ -556,12 +586,30 @@ const particleStyle = (i) => {
     animationDelay: `${delay}s`
   }
 }
+
+// Navigation functions
+const goToProduct = () => {
+  router.push('/product')
+}
+
+const openJoinModal = () => {
+  showJoinModal.value = true
+}
 </script>
 
 <style scoped>
 /* RESET AND BASE */
 .homepage-elegant {
   margin-top: 0;
+}
+
+/* Gold and Blue text colors */
+.gold-text {
+  color: #C4922C;
+}
+
+.blue-text {
+  color: #193762;
 }
 
 /* HERO SECTION - FULL SCREEN */
@@ -575,6 +623,26 @@ const particleStyle = (i) => {
   background: #0B1C2D;
   margin-top: 0;
   padding-top: 0;
+}
+
+/* Hero column alignment - FIXED */
+.hero-content-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 120px !important;
+}
+
+@media (max-width: 960px) {
+  .hero-content-column {
+    padding-top: 100px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-content-column {
+    padding-top: 80px !important;
+  }
 }
 
 /* Animated Background */
@@ -651,11 +719,6 @@ const particleStyle = (i) => {
   color: white;
 }
 
-.hero-badge .glow {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  color: #193762;
-}
-
 /* Main Title */
 .hero-main-title {
   font-size: 4rem;
@@ -678,17 +741,6 @@ const particleStyle = (i) => {
   color: #C4922C;
   position: relative;
   display: inline-block;
-}
-
-.accent-text::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: #C4922C;
-  border-radius: 2px;
 }
 
 .hero-subtitle {
@@ -1021,6 +1073,7 @@ const particleStyle = (i) => {
   margin: 0 10px;
   transition: all 0.3s ease;
   z-index: 1;
+  cursor: pointer;
 }
 
 .honeycomb-hexagon {
@@ -1029,7 +1082,7 @@ const particleStyle = (i) => {
   height: 100%;
   background: var(--hex-color, rgba(25, 55, 98, 0.1));
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  cursor: default;
+  cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   justify-content: center;
@@ -1045,8 +1098,7 @@ const particleStyle = (i) => {
   box-shadow: 0 15px 30px rgba(196, 146, 44, 0.2);
 }
 
-/* Hexagon Content - Icon + Text Only (No Numbers) */
-/* Hexagon Content - Icon + Text Only (No Numbers) */
+/* Hexagon Content - Icon + Text Only */
 .hexagon-content {
   text-align: center;
   padding: 15px 12px;
@@ -1054,7 +1106,7 @@ const particleStyle = (i) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;  /* ADD THIS - centers vertically */
+  justify-content: center;
   gap: 6px;
   z-index: 2;
   position: relative;
@@ -1246,19 +1298,19 @@ const particleStyle = (i) => {
   color: white;
 }
 
-/* FOOTER SECTION */
+/* FOOTER SECTION - UPDATED */
 .footer-section {
   background: #0B1C2D;
   color: white;
-  padding: 80px 0 40px;
+  padding: 40px 0 20px; /* Reduced height */
 }
 
 .footer-brand {
-  padding-right: 40px;
+  padding-right: 30px;
 }
 
 .footer-logo {
-  font-size: 2.25rem;
+  font-size: 1.75rem; /* Slightly smaller */
   font-weight: 700;
   color: white;
   letter-spacing: 1px;
@@ -1266,8 +1318,8 @@ const particleStyle = (i) => {
 
 .footer-tagline {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 1.125rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.4;
 }
 
 .social-icons {
@@ -1288,17 +1340,18 @@ const particleStyle = (i) => {
 }
 
 .footer-heading {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: white;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .contact-item {
   display: flex;
   align-items: flex-start;
   color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
 
 .contact-item span {
@@ -1308,14 +1361,15 @@ const particleStyle = (i) => {
 .footer-links-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .footer-link {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
 }
 
 .footer-link:hover {
@@ -1328,11 +1382,11 @@ const particleStyle = (i) => {
 }
 
 .copyright {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .footer-note {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-style: italic;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -1493,6 +1547,10 @@ const particleStyle = (i) => {
     padding-right: 0;
     margin-bottom: 2rem;
   }
+  
+  .footer-section {
+    padding: 30px 0 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1621,11 +1679,15 @@ const particleStyle = (i) => {
   }
   
   .footer-section {
-    padding: 60px 0 30px;
+    padding: 25px 0 15px;
   }
   
   .footer-logo {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+  }
+  
+  .contact-item {
+    font-size: 0.9rem;
   }
 }
 
